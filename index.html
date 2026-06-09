@@ -127,6 +127,7 @@ function Hero({ videoSrc="./olive-tagged.mp4", poster="./olive-tagged-poster.jpg
   useEffect(()=>{
     const runner=oliveRunnerRef.current, strip=oliveStripRef.current, view=oliveViewRef.current;
     if(!runner||!strip||!view) return;
+    if(!active){ runner.style.transform='translateX(-9999px)'; return; }   // wait until the intro centers
     if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ runner.style.display='none'; return; }
     const FW=363, RUN0=0, SITDN0=12, SIT0=20, SITN=12;   // frame width + sprite group starts + sit count
     const PER_FRAME=4.67, SIT_FPS=6;                     // measured px/run-frame + wag cadence
@@ -161,7 +162,7 @@ function Hero({ videoSrc="./olive-tagged.mp4", poster="./olive-tagged-poster.jpg
     };
     raf=requestAnimationFrame(tick);
     return ()=>{ cancelAnimationFrame(raf); window.removeEventListener('resize',onResize); };
-  },[]);
+  },[active]);
   useEffect(()=>{ if(!done||active) return; autoplayRef.current=setTimeout(()=>setActive(true),6000); return ()=>clearTimeout(autoplayRef.current); },[done,active]);
   useEffect(()=>{ const onScroll=()=>setScrolled(window.scrollY>60); window.addEventListener("scroll",onScroll,{passive:true}); onScroll(); return ()=>window.removeEventListener("scroll",onScroll); },[]);
 

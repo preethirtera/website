@@ -80,6 +80,7 @@ export default function Hero({
   useEffect(() => {
     const runner = oliveRunnerRef.current, strip = oliveStripRef.current, view = oliveViewRef.current;
     if (!runner || !strip || !view) return;
+    if (!active) { runner.style.transform = 'translateX(-9999px)'; return; }   // wait until the intro centers
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { runner.style.display = 'none'; return; }
     const FW = 363, RUN0 = 0, SITDN0 = 12, SIT0 = 20, SITN = 12;   // frame width + sprite group starts + sit count
     const PER_FRAME = 4.67, SIT_FPS = 6;                           // measured px/run-frame + wag cadence
@@ -114,7 +115,7 @@ export default function Hero({
     };
     raf = requestAnimationFrame(tick);
     return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', onResize); };
-  }, []);
+  }, [active]);
 
   // AUTO-PLAY: even without a click, fire the burst once the text finishes + a short
   // beat, so the intro never just sits there waiting
