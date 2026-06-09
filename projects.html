@@ -21,9 +21,28 @@
     font-family: 'Montserrat', system-ui, sans-serif;
   }
 
+  /* ---------- GLOBAL BAR ---------- */
+  .global-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 64px; z-index: 90;
+    background: var(--brown);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(24px, 5vw, 72px);
+    box-shadow: 0 4px 12px rgba(55, 32, 32, 0.22);
+  }
+  .global-bar__brand { color: var(--cream); font-weight: 700; font-size: 15px; letter-spacing: 0.04em; text-decoration: none; }
+  .global-nav { display: flex; gap: clamp(22px, 2.5vw, 38px); }
+  .global-nav a {
+    position: relative; color: rgba(255, 237, 161, 0.72);
+    font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em;
+    text-decoration: none; transition: color 0.25s ease;
+  }
+  .global-nav a::after { content: ""; position: absolute; left: 0; bottom: -5px; height: 1px; width: 0; background: var(--cream); transition: width 0.25s ease; }
+  .global-nav a.is-current, .global-nav a:hover { color: var(--cream); }
+  .global-nav a.is-current::after, .global-nav a:hover::after { width: 100%; }
+
   /* ---------- SECTION ---------- */
   .projects {
-    padding: clamp(48px, 9vh, 110px) clamp(18px, 4vw, 80px) 28vh;
+    padding: calc(64px + clamp(48px, 9vh, 110px)) clamp(18px, 4vw, 80px) 28vh;
   }
   .projects__head {
     max-width: 1200px;
@@ -134,6 +153,17 @@
 </style>
 </head>
 <body>
+
+  <header class="global-bar">
+    <a class="global-bar__brand" href="index.html?home">Preethi</a>
+    <nav class="global-nav">
+      <a href="index.html?home">Home</a>
+      <a href="about.html">About</a>
+      <a href="coming-soon.html">Work</a>
+      <a href="coming-soon.html">Play</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
   <section class="projects">
     <div class="projects__head">

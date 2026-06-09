@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Coming Soon — Preethi Tera</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { tech: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+        colors: { cream: '#FFEDA1', espresso: '#372020', corn: '#9FBFFF', poppy: '#FF2E2E' },
+      },
+    },
+  };
+</script>
+<style>
+  .grid-bg {
+    background-image:
+      repeating-linear-gradient(0deg,  rgba(55,32,32,0.06) 0 1px, transparent 1px 46px),
+      repeating-linear-gradient(90deg, rgba(55,32,32,0.06) 0 1px, transparent 1px 46px);
+  }
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  .spin-slow { animation: spin-slow 9s linear infinite; transform-origin: 50% 50%; }
+</style>
+</head>
+<body class="bg-cream">
+
+  <!-- GLOBAL NAV BAR -->
+  <header class="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between bg-espresso px-8 sm:px-12 shadow-[0_4px_12px_rgba(55,32,32,0.22)]">
+    <a href="index.html?home" class="font-tech text-[15px] font-bold tracking-wide text-cream">Preethi</a>
+    <nav class="flex gap-6 sm:gap-9 font-tech text-[12px] font-semibold uppercase tracking-[0.18em]">
+      <a href="index.html?home" class="text-cream/70 transition-colors hover:text-cream">Home</a>
+      <a href="about.html" class="text-cream/70 transition-colors hover:text-cream">About</a>
+      <a href="coming-soon.html" class="text-cream/70 transition-colors hover:text-cream">Work</a>
+      <a href="coming-soon.html" class="text-cream/70 transition-colors hover:text-cream">Play</a>
+      <a href="contact.html" class="text-cream/70 transition-colors hover:text-cream">Contact</a>
+    </nav>
+  </header>
+
+  <!-- CENTERPIECE -->
+  <main class="grid-bg flex min-h-screen w-full flex-col items-center justify-center bg-cream px-6 pt-16 text-center font-tech text-espresso">
+
+    <svg class="spin-slow mb-10 h-14 w-14 text-poppy" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <circle cx="24" cy="24" r="11" />
+      <line x1="24" y1="2" x2="24" y2="46" />
+      <line x1="2" y1="24" x2="46" y2="24" />
+    </svg>
+
+    <h1 class="font-black uppercase leading-[0.9] tracking-tight text-[18vw] md:text-[12vw]">
+      Coming<br />Soon
+    </h1>
+
+    <p class="mt-8 max-w-md text-sm uppercase tracking-[0.25em] text-espresso/70">
+      This corner of the site is under construction.
+    </p>
+
+    <a href="index.html?home"
+       class="group mt-10 inline-flex items-center gap-2 border-2 border-espresso px-7 py-3 text-xs font-semibold uppercase tracking-[0.25em] text-espresso transition-colors duration-200 hover:bg-espresso hover:text-cream">
+      <span aria-hidden="true" class="transition-transform duration-200 group-hover:-translate-x-1">&larr;</span> Back Home
+    </a>
+
+  </main>
+
+</body>
+</html>

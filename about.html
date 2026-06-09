@@ -118,7 +118,12 @@
     color: rgba(55, 32, 32, 0.86);
     max-width: 46ch;
   }
-  .bio strong { font-weight: 700; color: var(--red); }
+  .bio strong {
+    font-weight: 800; font-style: italic; color: var(--red);
+    border-radius: 3px; padding: 0 2px;
+    transition: background-color 0.2s ease-in-out;
+  }
+  .bio strong:hover { background-color: rgba(255, 46, 46, 0.10); }
 
   /* ---------- RIGHT: STAGGERED PHOTO STACK ---------- */
   .gallery { display: flex; flex-direction: column; }
@@ -147,7 +152,7 @@
   /* ---------- RESUME (reveals on scroll) ---------- */
   .resume {
     position: fixed;
-    right: clamp(22px, 5vw, 80px);   /* JS aligns this to the paragraph's right edge */
+    left: clamp(22px, 5vw, 80px);   /* aligned to the left edge of the bio text */
     bottom: clamp(22px, 4vh, 44px);
     z-index: 80;
     display: inline-flex; align-items: center; justify-content: center; gap: 9px;
@@ -187,8 +192,9 @@
     <nav class="global-nav">
       <a href="index.html?home">Home</a>
       <a href="about.html" class="is-current">About</a>
-      <a href="projects.html">Work</a>
-      <a href="#">Play</a>
+      <a href="coming-soon.html">Work</a>
+      <a href="coming-soon.html">Play</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
@@ -214,14 +220,11 @@
         </div>
       </div>
 
-      <!-- EDIT FREELY: this is placeholder copy in your voice -->
-      <p>I&rsquo;m Preethi &mdash; an <strong>architect and urban designer turned UX/UI product designer</strong>. I design digital products and the spatial environments they live inside, fluent in both pixels and plans.</p>
+      <p>Hi! I'm Preethi, a <strong>designer based in Austin</strong>. I originally studied <strong>architecture</strong> and I'm currently finishing up my degree in <strong>Urban Design</strong>. After wearing a lot of different hats early in my career, I found myself increasingly drawn to <strong>UI/UX and product design</strong>. While my core passion will always be in <strong>affordable housing</strong> and creating equitable physical spaces for communities, right now I&rsquo;m really excited to be exploring new directions in the digital space.</p>
 
-      <p>I spent years in architecture and urban design, drawn to how people move through and feel inside the spaces we build. That same instinct now drives my product work: designing interfaces and systems that are intuitive, humane, and built to scale.</p>
+      <p>When I&rsquo;m not working, I <strong>travel</strong> as much as I possibly can. Recently, that&rsquo;s looked like wandering around <strong>Japan and Paris</strong> with my sister, working remotely from the beach in <strong>Costa Rica</strong>, or catching a flight up to <strong>Toronto</strong>.</p>
 
-      <p>Recently I&rsquo;ve worked on <strong>Aeqos</strong>, an AI housing-data app, <strong>Vayu</strong>, and <strong>Mosaic41</strong>, an urban spatial system &mdash; blending research, data, and craft into each.</p>
-
-      <p>Outside of work, you&rsquo;ll find me traveling with my sister (Japan and Paris, most recently), exploring cities on foot, and at home with my Australian Shepherd and resident QA tester, Olive.</p>
+      <p>Back home in Austin, I like to keep just as busy. You can usually find me sweating it out at <strong>[solidcore]</strong> or <strong>SoulCycle</strong>, taking a pottery class, or exploring a new trail with friends. And no matter what I'm doing, I'm almost always hanging out with my <strong>Australian Shepherd, Olive</strong>, who happily doubles as my resident QA tester.</p>
     </section>
 
     <!-- RIGHT: STAGGERED PHOTOS -->
@@ -242,17 +245,10 @@
   </a>
 
   <script>
+    // resume button stays fixed at the bottom-left; only appears once the user scrolls down
     const resume = document.querySelector('.resume');
-    const refPara = document.querySelector('.bio p');
-    const align = () => {
-      // line the button's right edge up with the paragraph's right edge
-      const r = refPara.getBoundingClientRect();
-      resume.style.right = Math.max(22, window.innerWidth - r.right) + 'px';
-    };
     const onScroll = () => resume.classList.toggle('show', window.scrollY > 120);
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', align);
-    align();
     onScroll();
   </script>
 

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Get in Touch — Preethi Tera</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { tech: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+        colors: { cream: '#FFEDA1', espresso: '#372020', corn: '#9FBFFF', poppy: '#FF2E2E' },
+      },
+    },
+  };
+</script>
+<style>
+  /* 1. Architectural blueprint grid overlay */
+  .grid-bg {
+    background-image:
+      repeating-linear-gradient(0deg,  rgba(55,32,32,0.06) 0 1px, transparent 1px 46px),
+      repeating-linear-gradient(90deg, rgba(55,32,32,0.06) 0 1px, transparent 1px 46px);
+  }
+  /* 2. Wireframe headline → fills on column hover */
+  .wire {
+    color: transparent;
+    -webkit-text-stroke: 2.5px #372020;
+    transition: color .45s ease, -webkit-text-stroke-color .45s ease;
+  }
+  .left-col:hover .wire { color: #9FBFFF; -webkit-text-stroke-color: #9FBFFF; }
+  /* slow infinite rotation for the crosshair */
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  .spin-slow { animation: spin-slow 9s linear infinite; transform-origin: 50% 50%; }
+</style>
+</head>
+<body class="bg-cream">
+
+  <!-- ============ GLOBAL NAV BAR ============ -->
+  <header class="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between bg-espresso px-8 sm:px-12 shadow-[0_4px_12px_rgba(55,32,32,0.22)]">
+    <a href="index.html?home" class="font-tech text-[15px] font-bold tracking-wide text-cream">Preethi</a>
+    <nav class="flex gap-7 sm:gap-9 font-tech text-[12px] font-semibold uppercase tracking-[0.18em]">
+      <a href="index.html?home" class="text-cream/70 transition-colors hover:text-cream">Home</a>
+      <a href="about.html" class="text-cream/70 transition-colors hover:text-cream">About</a>
+      <a href="coming-soon.html" class="text-cream/70 transition-colors hover:text-cream">Work</a>
+      <a href="coming-soon.html" class="text-cream/70 transition-colors hover:text-cream">Play</a>
+      <a href="contact.html" class="text-cream transition-colors hover:text-cream">Contact</a>
+    </nav>
+  </header>
+
+  <main class="grid-bg min-h-screen w-full bg-cream font-tech text-espresso grid md:grid-cols-2 pt-16">
+
+    <!-- ============ LEFT — KINETIC WIREFRAME TYPOGRAPHY ============ -->
+    <section class="left-col group relative flex flex-col justify-center px-8 sm:px-12 lg:px-16 pt-20 pb-28 cursor-default">
+
+      <!-- rotating crosshair -->
+      <svg class="spin-slow mb-8 h-12 w-12 text-poppy" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <circle cx="24" cy="24" r="11" />
+        <line x1="24" y1="2" x2="24" y2="46" />
+        <line x1="2" y1="24" x2="46" y2="24" />
+      </svg>
+
+      <h1 class="wire font-black uppercase leading-[0.92] tracking-tight text-[16vw] md:text-[8vw] select-none">
+        Let&rsquo;s<br />Get In<br />Touch
+      </h1>
+
+      <!-- footer info -->
+      <div class="absolute bottom-0 left-0 px-8 sm:px-12 lg:px-16 pb-8 flex flex-wrap items-center gap-x-6 gap-y-1 text-[11px] uppercase tracking-[0.22em]">
+        <span id="today">June 9, 2026</span>
+        <span class="opacity-70">Austin, Texas</span>
+        <a href="#" class="transition-colors duration-200 hover:text-corn">LinkedIn</a>
+      </div>
+    </section>
+
+    <!-- ============ RIGHT — BLUEPRINT FORM ============ -->
+    <section class="flex items-center px-8 sm:px-12 lg:px-20 py-20 md:border-l border-espresso/30">
+      <form class="w-full max-w-xl" onsubmit="return false;">
+
+        <!-- Name -->
+        <div class="relative mb-12">
+          <input id="name" type="text" placeholder=" " autocomplete="name"
+                 class="peer w-full border-b-4 border-espresso bg-transparent pt-7 pb-2 text-2xl text-espresso outline-none transition-colors focus:border-poppy" />
+          <label for="name" class="pointer-events-none absolute left-0 top-7 text-2xl uppercase tracking-wide text-espresso/45 transition-all duration-200
+                 peer-focus:top-0 peer-focus:text-xs peer-focus:tracking-[0.25em] peer-focus:text-poppy
+                 peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:tracking-[0.25em]">Name</label>
+        </div>
+
+        <!-- Email -->
+        <div class="relative mb-12">
+          <input id="email" type="email" placeholder=" " autocomplete="email"
+                 class="peer w-full border-b-4 border-espresso bg-transparent pt-7 pb-2 text-2xl text-espresso outline-none transition-colors focus:border-poppy" />
+          <label for="email" class="pointer-events-none absolute left-0 top-7 text-2xl uppercase tracking-wide text-espresso/45 transition-all duration-200
+                 peer-focus:top-0 peer-focus:text-xs peer-focus:tracking-[0.25em] peer-focus:text-poppy
+                 peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:tracking-[0.25em]">Email</label>
+        </div>
+
+        <!-- Topic -->
+        <div class="relative mb-12">
+          <input id="topic" type="text" placeholder=" "
+                 class="peer w-full border-b-4 border-espresso bg-transparent pt-7 pb-2 text-2xl text-espresso outline-none transition-colors focus:border-poppy" />
+          <label for="topic" class="pointer-events-none absolute left-0 top-7 text-2xl uppercase tracking-wide text-espresso/45 transition-all duration-200
+                 peer-focus:top-0 peer-focus:text-xs peer-focus:tracking-[0.25em] peer-focus:text-poppy
+                 peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:tracking-[0.25em]">Topic</label>
+        </div>
+
+        <!-- Message -->
+        <div class="relative mb-10">
+          <textarea id="message" rows="2" placeholder=" "
+                    class="peer w-full resize-none border-b-4 border-espresso bg-transparent pt-7 pb-2 text-2xl text-espresso outline-none transition-colors focus:border-poppy"></textarea>
+          <label for="message" class="pointer-events-none absolute left-0 top-7 text-2xl uppercase tracking-wide text-espresso/45 transition-all duration-200
+                 peer-focus:top-0 peer-focus:text-xs peer-focus:tracking-[0.25em] peer-focus:text-poppy
+                 peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:tracking-[0.25em]">Message</label>
+        </div>
+
+        <!-- Massive submit -->
+        <button type="submit"
+                class="group flex w-full items-center justify-center gap-4 border-4 border-espresso bg-cream px-8 py-7 text-base font-bold uppercase tracking-[0.3em] text-espresso transition-colors duration-200 hover:bg-espresso hover:text-cream">
+          Submit
+          <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-2">&rarr;</span>
+        </button>
+      </form>
+    </section>
+
+  </main>
+
+  <script>
+    document.getElementById('today').textContent =
+      new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  </script>
+
+</body>
+</html>
