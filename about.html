@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Preethi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #FFEDA1;
+    --red:   #FF2E2E;
+    --brown: #372020;
+    --blue:  #9FBFFF;
+    --bar-h: 64px;
+    --ticker-h: 40px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--brown);
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- GLOBAL BAR (always visible) ---------- */
+  .global-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--bar-h);
+    background: var(--brown); z-index: 90;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(24px, 5vw, 72px);
+    box-shadow: 0 4px 12px rgba(55, 32, 32, 0.22);
+  }
+  .global-bar__brand {
+    color: var(--cream);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .global-nav { display: flex; gap: clamp(22px, 2.5vw, 38px); }
+  .global-nav a {
+    position: relative;
+    color: rgba(255, 237, 161, 0.72);
+    font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+  .global-nav a::after {
+    content: ""; position: absolute; left: 0; bottom: -5px;
+    height: 1px; width: 0; background: var(--cream);
+    transition: width 0.25s ease;
+  }
+  .global-nav a.is-current { color: var(--cream); }
+  .global-nav a.is-current::after { width: 100%; }
+  .global-nav a:hover { color: var(--cream); }
+  .global-nav a:hover::after { width: 100%; }
+
+  /* ---------- LAYOUT ---------- */
+  .about {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: calc(var(--bar-h) + clamp(40px, 7vh, 96px)) clamp(22px, 5vw, 80px) clamp(80px, 14vh, 180px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(32px, 6vw, 96px);
+    align-items: start;
+  }
+
+  /* ---------- LEFT: BIO ---------- */
+  .bio { position: sticky; top: calc(var(--bar-h) + clamp(28px, 5vh, 64px)); }
+
+  /* ---------- WALL-STREET TICKER (sits under "About me") ---------- */
+  .ticker {
+    margin: 2px 0 clamp(24px, 3.4vh, 38px);
+    height: 30px;
+    background: transparent;
+    border-top: 1.5px solid var(--brown);
+    border-bottom: 1.5px solid var(--brown);
+    overflow: hidden;
+    display: flex; align-items: center;
+  }
+  .ticker__track {
+    display: inline-flex; align-items: center;
+    white-space: nowrap;
+    will-change: transform;
+    animation: ticker 26s linear infinite;
+  }
+  .ticker:hover .ticker__track { animation-play-state: paused; }
+  .ticker__item {
+    display: inline-flex; align-items: center; gap: 22px;
+    padding: 0 22px;
+    color: var(--brown);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .ticker__item::after { content: "✦"; color: var(--red); font-size: 12px; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .bio__title {
+    margin: 0 0 clamp(20px, 3vh, 34px);
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(44px, 6.4vw, 86px);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+  .bio p {
+    margin: 0 0 clamp(16px, 2.4vh, 24px);
+    font-size: clamp(15px, 1.2vw, 18px);
+    line-height: 1.62;
+    color: rgba(55, 32, 32, 0.86);
+    max-width: 46ch;
+  }
+  .bio strong { font-weight: 700; color: var(--red); }
+
+  /* ---------- RIGHT: STAGGERED PHOTO STACK ---------- */
+  .gallery { display: flex; flex-direction: column; }
+  .shot {
+    margin: 0;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 3px solid var(--brown);
+    box-shadow: 12px 14px 0 var(--brown);
+    background: #eee;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+  }
+  .shot img {
+    width: 100%; height: 100%; display: block; object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+    transition: filter 0.5s ease-in-out;
+  }
+  .shot:hover { transform: translateY(-8px); box-shadow: 16px 20px 0 var(--brown); }
+  .shot:hover img { filter: grayscale(0) contrast(1); }
+
+  /* alternating widths + horizontal stagger, slight vertical overlap */
+  .shot:nth-child(1) { width: 80%; align-self: flex-end; }
+  .shot:nth-child(2) { width: 72%; align-self: flex-start; margin-left: 4%; margin-top: clamp(-30px, -3vw, -14px); }
+  .shot:nth-child(3) { width: 66%; align-self: flex-end; margin-right: 6%; margin-top: clamp(-26px, -2.5vw, -12px); }
+
+  /* ---------- RESUME (reveals on scroll) ---------- */
+  .resume {
+    position: fixed;
+    right: clamp(22px, 5vw, 80px);   /* JS aligns this to the paragraph's right edge */
+    bottom: clamp(22px, 4vh, 44px);
+    z-index: 80;
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    padding: 12px 24px;
+    background: var(--blue); color: var(--brown);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px; font-weight: 700;
+    text-decoration: none;
+    border: 3px solid var(--brown);
+    border-radius: 999px;
+    box-shadow: 5px 6px 0 var(--brown);
+    opacity: 0; transform: translateY(18px);
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+  }
+  .resume.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .resume:hover { transform: translateY(-3px); box-shadow: 7px 9px 0 var(--brown); }
+  .resume:active { transform: translateY(1px); box-shadow: 3px 4px 0 var(--brown); }
+  .resume svg { width: 16px; height: 16px; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px) {
+    .about { grid-template-columns: 1fr; gap: 44px; }
+    .bio { position: static; }
+    .gallery { align-items: center; }
+    .shot, .shot:nth-child(1), .shot:nth-child(2), .shot:nth-child(3) {
+      width: 88%; align-self: center; margin: 0 0 -18px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- GLOBAL BAR -->
+  <header class="global-bar">
+    <a class="global-bar__brand" href="index.html?home">Preethi</a>
+    <nav class="global-nav">
+      <a href="index.html?home">Home</a>
+      <a href="about.html" class="is-current">About</a>
+      <a href="projects.html">Work</a>
+      <a href="#">Play</a>
+    </nav>
+  </header>
+
+  <main class="about">
+
+    <!-- LEFT: BIO -->
+    <section class="bio">
+      <h1 class="bio__title">About me</h1>
+
+      <!-- WALL-STREET TICKER -->
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <span class="ticker__item">Architecture</span>
+          <span class="ticker__item">Urban Design</span>
+          <span class="ticker__item">Project Management</span>
+          <span class="ticker__item">UI / UX</span>
+          <span class="ticker__item">Product Design</span>
+          <span class="ticker__item">Architecture</span>
+          <span class="ticker__item">Urban Design</span>
+          <span class="ticker__item">Project Management</span>
+          <span class="ticker__item">UI / UX</span>
+          <span class="ticker__item">Product Design</span>
+        </div>
+      </div>
+
+      <!-- EDIT FREELY: this is placeholder copy in your voice -->
+      <p>I&rsquo;m Preethi &mdash; an <strong>architect and urban designer turned UX/UI product designer</strong>. I design digital products and the spatial environments they live inside, fluent in both pixels and plans.</p>
+
+      <p>I spent years in architecture and urban design, drawn to how people move through and feel inside the spaces we build. That same instinct now drives my product work: designing interfaces and systems that are intuitive, humane, and built to scale.</p>
+
+      <p>Recently I&rsquo;ve worked on <strong>Aeqos</strong>, an AI housing-data app, <strong>Vayu</strong>, and <strong>Mosaic41</strong>, an urban spatial system &mdash; blending research, data, and craft into each.</p>
+
+      <p>Outside of work, you&rsquo;ll find me traveling with my sister (Japan and Paris, most recently), exploring cities on foot, and at home with my Australian Shepherd and resident QA tester, Olive.</p>
+    </section>
+
+    <!-- RIGHT: STAGGERED PHOTOS -->
+    <section class="gallery">
+      <figure class="shot"><img src="preethi-paris.jpg" alt="Preethi in Paris" /></figure>
+      <figure class="shot"><img src="olive.jpg" alt="Olive, the studio dog" /></figure>
+      <figure class="shot"><img src="japan-sisters.jpg" alt="Traveling in Japan with my sister" /></figure>
+    </section>
+
+  </main>
+
+  <!-- RESUME — appears on scroll -->
+  <a class="resume" href="Preethi-Reddy-Tera-Resume.pdf" download>
+    Download PDF resume
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3v12" /><path d="M7 11l5 5 5-5" /><path d="M5 21h14" />
+    </svg>
+  </a>
+
+  <script>
+    const resume = document.querySelector('.resume');
+    const refPara = document.querySelector('.bio p');
+    const align = () => {
+      // line the button's right edge up with the paragraph's right edge
+      const r = refPara.getBoundingClientRect();
+      resume.style.right = Math.max(22, window.innerWidth - r.right) + 'px';
+    };
+    const onScroll = () => resume.classList.toggle('show', window.scrollY > 120);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', align);
+    align();
+    onScroll();
+  </script>
+
+</body>
+</html>

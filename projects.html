@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Selected Work — Preethi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream:  #FFEDA1;
+    --red:    #FF2E2E;
+    --brown:  #372020;
+    --blue:   #9FBFFF;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--brown);
+    font-family: 'Montserrat', system-ui, sans-serif;
+  }
+
+  /* ---------- SECTION ---------- */
+  .projects {
+    padding: clamp(48px, 9vh, 110px) clamp(18px, 4vw, 80px) 28vh;
+  }
+  .projects__head {
+    max-width: 1200px;
+    margin: 0 auto clamp(28px, 5vh, 56px);
+  }
+  .projects__eyebrow {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(55, 32, 32, 0.55);
+  }
+  .projects__title {
+    margin: 0;
+    font-size: clamp(34px, 6vw, 68px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  /* ---------- STICKY STACK ---------- */
+  .stack { max-width: 1200px; margin: 0 auto; }
+
+  .card {
+    position: sticky;
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 4vw, 56px);
+    width: 100%;
+    min-height: clamp(180px, 26vh, 250px);
+    padding: clamp(28px, 4vw, 60px);
+    border-radius: 3rem;
+    margin-bottom: 42vh;                 /* scroll distance before the next card stacks */
+    box-shadow: 0 14px 40px rgba(55, 32, 32, 0.16);
+    transition: box-shadow 0.3s ease;
+    transform-origin: 50% 0%;            /* shrinks back from the top as it gets covered */
+    will-change: transform;
+  }
+  .card:last-child { margin-bottom: 4vh; }
+
+  /* increasing offsets = each card stops a touch lower, leaving a peek of the one behind */
+  .card:nth-child(1) { top: clamp(80px, 10vh, 120px);  background: var(--blue);  color: var(--brown); }
+  .card:nth-child(2) { top: clamp(104px, 13vh, 152px); background: var(--red);   color: var(--cream); }
+  .card:nth-child(3) { top: clamp(128px, 16vh, 184px); background: var(--cream); color: var(--brown);
+                       border: 4px solid var(--brown); box-shadow: 8px 12px 0 var(--brown); }
+
+  /* ---------- CARD CONTENT ---------- */
+  .card__left { flex: 1 1 auto; min-width: 0; }
+  .card__index {
+    margin: 0 0 6px;
+    font-size: clamp(13px, 1.2vw, 15px);
+    font-weight: 700;
+    opacity: 0.65;
+    letter-spacing: 0.08em;
+  }
+  .card__title {
+    margin: 0;
+    font-size: clamp(30px, 4.6vw, 60px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.5px;
+  }
+  .card__desc {
+    margin: 10px 0 0;
+    font-size: clamp(14px, 1.4vw, 17px);
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  .card__tags { display: flex; gap: 10px; flex-shrink: 0; }
+  .tag {
+    border: 2px solid currentColor;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: clamp(12px, 1.1vw, 14px);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .card__view {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: clamp(16px, 1.6vw, 20px);
+    font-weight: 700;
+    white-space: nowrap;
+    text-decoration: none;
+    color: inherit;
+  }
+  .card__view .arrow { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1); }
+  .card:hover .card__view .arrow { transform: translateX(6px); }
+  .card:hover { box-shadow: 0 20px 52px rgba(55, 32, 32, 0.24); }
+  .card:nth-child(3):hover { box-shadow: 11px 15px 0 var(--brown); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 760px) {
+    .card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      min-height: 0;
+      border-radius: 2.2rem;
+      margin-bottom: 36vh;
+    }
+    .card__tags { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+  <section class="projects">
+    <div class="projects__head">
+      <p class="projects__eyebrow">Selected Work</p>
+      <h2 class="projects__title">Things I&rsquo;ve built.</h2>
+    </div>
+
+    <div class="stack">
+      <article class="card">
+        <div class="card__left">
+          <p class="card__index">01</p>
+          <h3 class="card__title">Aeqos</h3>
+          <p class="card__desc">AI Housing Data App</p>
+        </div>
+        <div class="card__tags">
+          <span class="tag">UI / UX</span>
+          <span class="tag">Data Viz</span>
+        </div>
+        <a class="card__view" href="#">View <span class="arrow">&rarr;</span></a>
+      </article>
+
+      <article class="card">
+        <div class="card__left">
+          <p class="card__index">02</p>
+          <h3 class="card__title">Vayu</h3>
+          <p class="card__desc">Digital Product</p>
+        </div>
+        <div class="card__tags">
+          <span class="tag">Product Design</span>
+          <span class="tag">Prototyping</span>
+        </div>
+        <a class="card__view" href="#">View <span class="arrow">&rarr;</span></a>
+      </article>
+
+      <article class="card">
+        <div class="card__left">
+          <p class="card__index">03</p>
+          <h3 class="card__title">Mosaic41</h3>
+          <p class="card__desc">Urban Spatial System</p>
+        </div>
+        <div class="card__tags">
+          <span class="tag">Spatial Design</span>
+          <span class="tag">Urban Design</span>
+        </div>
+        <a class="card__view" href="#">View <span class="arrow">&rarr;</span></a>
+      </article>
+    </div>
+  </section>
+
+  <script>
+    // premium depth: each card scales back a touch as the next one stacks over it
+    (function () {
+      const cards = Array.from(document.querySelectorAll('.card'));
+      function update() {
+        for (let i = 0; i < cards.length; i++) {
+          const card = cards[i], next = cards[i + 1];
+          if (!next) { card.style.transform = 'scale(1)'; continue; }
+          const dist = next.getBoundingClientRect().top - card.getBoundingClientRect().top;
+          const start = card.offsetHeight;  // begin shrinking when next is ~a card below
+          const end = 28;                   // fully stacked (the peek)
+          let p = (start - dist) / (start - end);
+          p = Math.max(0, Math.min(1, p));
+          card.style.transform = 'scale(' + (1 - p * 0.06).toFixed(4) + ')';
+        }
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+
+</body>
+</html>
