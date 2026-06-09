@@ -69,6 +69,12 @@ export default function Hero({
     setActive(true);
   };
 
+  // lock page scrolling on the hero until the intro is triggered (click / auto-play)
+  useEffect(() => {
+    document.body.style.overflow = active ? "" : "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, [active]);
+
   // Olive: 8.5s loop — run in (0–30%) → sit & wag (30–70%) → run off (70–100%).
   // Movement matches that exact timeline; leg cadence is derived from the run speed so paws grip.
   useEffect(() => {
