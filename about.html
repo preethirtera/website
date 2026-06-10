@@ -30,7 +30,7 @@
   .global-bar {
     position: fixed; top: 0; left: 0; right: 0; height: var(--bar-h);
     background: var(--brown); z-index: 90;
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; justify-content: flex-end;
     padding: 0 clamp(24px, 5vw, 72px);
     box-shadow: 0 4px 12px rgba(55, 32, 32, 0.22);
   }
@@ -149,12 +149,13 @@
   .shot:nth-child(2) { width: 72%; align-self: flex-start; margin-left: 4%; margin-top: clamp(-30px, -3vw, -14px); }
   .shot:nth-child(3) { width: 66%; align-self: flex-end; margin-right: 6%; margin-top: clamp(-26px, -2.5vw, -12px); }
 
-  /* ---------- RESUME (reveals on scroll) ---------- */
+  /* ---------- RESUME (sits in flow at the bottom of the page) ---------- */
+  .resume-dock {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(22px, 5vw, 80px) clamp(48px, 9vh, 110px);
+  }
   .resume {
-    position: fixed;
-    left: clamp(22px, 5vw, 80px);   /* aligned to the left edge of the bio text */
-    bottom: clamp(22px, 4vh, 44px);
-    z-index: 80;
     display: inline-flex; align-items: center; justify-content: center; gap: 9px;
     padding: 12px 24px;
     background: var(--blue); color: var(--brown);
@@ -164,11 +165,8 @@
     border: 3px solid var(--brown);
     border-radius: 999px;
     box-shadow: 5px 6px 0 var(--brown);
-    opacity: 0; transform: translateY(18px);
-    pointer-events: none;
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
   }
-  .resume.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
   .resume:hover { transform: translateY(-3px); box-shadow: 7px 9px 0 var(--brown); }
   .resume:active { transform: translateY(1px); box-shadow: 3px 4px 0 var(--brown); }
   .resume svg { width: 16px; height: 16px; }
@@ -188,7 +186,6 @@
 
   <!-- GLOBAL BAR -->
   <header class="global-bar">
-    <a class="global-bar__brand" href="index.html?home">Preethi</a>
     <nav class="global-nav">
       <a href="index.html?home">Home</a>
       <a href="about.html" class="is-current">About</a>
@@ -220,7 +217,7 @@
         </div>
       </div>
 
-      <p>Hi! I'm Preethi, a <strong>designer based in Austin</strong>. I originally studied <strong>architecture</strong> and I'm currently finishing up my degree in <strong>Urban Design</strong>. After wearing a lot of different hats early in my career, I found myself increasingly drawn to <strong>UI/UX and product design</strong>. While my core passion will always be in <strong>affordable housing</strong> and creating equitable physical spaces for communities, right now I&rsquo;m really excited to be exploring new directions in the digital space.</p>
+      <p>Hi! I'm Preethi, a <strong>designer based in Austin</strong>. I originally studied <strong>architecture</strong> and I'm currently finishing up my degree in <strong>Urban Design</strong>. After wearing a lot of different hats early in my career, I found myself increasingly drawn to <strong>UI/UX and product design</strong>. While I remain deeply committed to the <strong>affordable housing</strong> movement and creating equitable physical spaces, I&rsquo;m currently excited to explore new directions in <strong>digital product design</strong>.</p>
 
       <p>When I&rsquo;m not working, I <strong>travel</strong> as much as I possibly can. Recently, that&rsquo;s looked like wandering around <strong>Japan and Paris</strong> with my sister, working remotely from the beach in <strong>Costa Rica</strong>, or catching a flight up to <strong>Toronto</strong>.</p>
 
@@ -236,21 +233,15 @@
 
   </main>
 
-  <!-- RESUME — appears on scroll -->
-  <a class="resume" href="Preethi-Reddy-Tera-Resume.pdf" download>
-    Download PDF resume
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 3v12" /><path d="M7 11l5 5 5-5" /><path d="M5 21h14" />
-    </svg>
-  </a>
-
-  <script>
-    // resume button stays fixed at the bottom-left; only appears once the user scrolls down
-    const resume = document.querySelector('.resume');
-    const onScroll = () => resume.classList.toggle('show', window.scrollY > 120);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  </script>
+  <!-- RESUME — sits at the bottom of the page, aligned with the text -->
+  <div class="resume-dock">
+    <a class="resume" href="Preethi-Reddy-Tera-Resume.pdf" download>
+      Download PDF resume
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v12" /><path d="M7 11l5 5 5-5" /><path d="M5 21h14" />
+      </svg>
+    </a>
+  </div>
 
 </body>
 </html>

@@ -60,7 +60,6 @@ export default function Hero({
   const videoRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const autoplayRef = useRef(null);
-  const oliveRunnerRef = useRef(null), oliveViewRef = useRef(null), oliveStripRef = useRef(null);
 
   // CLICK = fast-forward: cancel the auto timer and fire immediately (skip the wait)
   const activate = () => {
@@ -75,47 +74,6 @@ export default function Hero({
     return () => { document.body.style.overflow = ""; };
   }, [active]);
 
-  // Olive: 8.5s loop — run in (0–30%) → sit & wag (30–70%) → run off (70–100%).
-  // Movement matches that exact timeline; leg cadence is derived from the run speed so paws grip.
-  useEffect(() => {
-    const runner = oliveRunnerRef.current, strip = oliveStripRef.current, view = oliveViewRef.current;
-    if (!runner || !strip || !view) return;
-    if (!active) { runner.style.transform = 'translateX(-9999px)'; return; }   // wait until the intro centers
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { runner.style.display = 'none'; return; }
-    const FW = 363, RUN0 = 0, SITDN0 = 12, SIT0 = 20, SITN = 12;   // frame width + sprite group starts + sit count
-    const PER_FRAME = 4.67, SIT_FPS = 6;                           // measured px/run-frame + wag cadence
-    // ----- timeline (bigger T_IN/T_OUT = slower run + smoother legs near native 12fps) -----
-    const T_IN = 11000;                 // run in
-    const SD = 550, SH = 2600, SU = 550; // sit-down + wag-hold + stand-up
-    const T_OUT = 11000;                // run off (keep == T_IN for matched in/out speed)
-    const TOTAL = T_IN + SD + SH + SU + T_OUT; // = 8500ms
-    const t1 = T_IN, t2 = t1 + SD, t3 = t2 + SH, t4 = t3 + SU;
-    let boxVis = view.getBoundingClientRect().width || 207;
-    const onResize = () => { boxVis = view.getBoundingClientRect().width || 207; };
-    window.addEventListener('resize', onResize);
-    const setFrame = f => { strip.style.transform = 'translateX(' + (-f * FW) + 'px)'; };
-    const setX = x => { runner.style.transform = 'translateX(' + x + 'px)'; };
-    let raf, start = performance.now();
-    const tick = now => {
-      const W = window.innerWidth, startX = -(boxVis + 40), centerX = W / 2 - boxVis / 2, endX = W + 40;
-      const Din = centerX - startX, Dout = endX - centerX, t = (now - start) % TOTAL;
-      if (t < t1) {                       // run in (constant speed)
-        const p = t / T_IN; setX(startX + Din * p);
-        const fps = (Din / (T_IN / 1000)) / PER_FRAME;     // leg cadence locked to ground speed
-        setFrame(RUN0 + Math.floor((t / 1000) * fps) % 12);
-      } else if (t < t2) { setX(centerX); setFrame(SITDN0 + Math.min(7, Math.floor(((t - t1) / SD) * 8))); }
-      else if (t < t3) { setX(centerX); setFrame(SIT0 + Math.floor(((t - t2) / 1000) * SIT_FPS) % SITN); }
-      else if (t < t4) { setX(centerX); setFrame((SITDN0 + 7) - Math.min(7, Math.floor(((t - t3) / SU) * 8))); }
-      else {                              // run off (constant speed)
-        const tp = t - t4, p = tp / T_OUT; setX(centerX + Dout * p);
-        const fps = (Dout / (T_OUT / 1000)) / PER_FRAME;
-        setFrame(RUN0 + Math.floor((tp / 1000) * fps) % 12);
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', onResize); };
-  }, [active]);
 
   // AUTO-PLAY: even without a click, fire the burst once the text finishes + a short
   // beat, so the intro never just sits there waiting
@@ -268,10 +226,13 @@ export default function Hero({
         </div>
       </div>
 
-      {/* Olive runs in, sits & wags in the centre, then runs off (transparent sprite) */}
-      <div className="olive-runner" ref={oliveRunnerRef} aria-hidden="true">
-        <div className="olive-viewport" ref={oliveViewRef}><div className="olive-strip" ref={oliveStripRef} /></div>
-      </div>
+      {/* Olive poofs in and sits, wagging her tail — only after the intro centers */}
+      {active && (
+        <div className="olive-runner" aria-hidden="true">
+          <span className="olive-poof" />
+          <div className="olive-pop"><div className="olive-viewport"><div className="olive-strip" /></div></div>
+        </div>
+      )}
     </section>
   );
 }
@@ -499,9 +460,16 @@ const css = `
 .is-active.scrolled .global-bar { transform: translateY(0); }
 
 /* ---------- OLIVE RUNNER (transparent sprite, JS-driven) ---------- */
-.olive-runner { position: absolute; left: 0; bottom: 6px; z-index: 3; pointer-events: none; will-change: transform; transform: translateX(-9999px); }
-.olive-viewport { width: 363px; height: 240px; overflow: hidden; transform: scale(0.58); transform-origin: left bottom; }
-.olive-strip { width: 11616px; height: 240px; background: url('/olive-run.png?v=7') 0 0 / 11616px 240px; will-change: transform; }
+.olive-runner { position: absolute; left: 50%; bottom: 6px; z-index: 3; pointer-events: none; transform: translateX(-50%); }
+.olive-poof { position: absolute; left: 50%; bottom: -26px; width: 230px; height: 230px; transform: translate(-50%, 0) scale(0.3); opacity: 0; z-index: 2; background: url('/poof.svg?v=2') center / contain no-repeat; animation: oPoof 10s ease-out infinite; }
+.olive-pop { position: relative; z-index: 1; transform-origin: bottom center; animation: oliveCycle 10s ease-in-out infinite; }
+.olive-viewport { width: 363px; height: 240px; overflow: hidden; transform: scale(0.58); transform-origin: bottom center; }
+.olive-strip { width: 11616px; height: 240px; background: url('/olive-run.png?v=7') 0 0 / 11616px 240px; transform: translateX(-7260px); animation: oWag 2s steps(12) infinite; }
+/* 10s loop: poof in (0–5%), sit & wag x2 (5–45%), tilt head (45–53%), poof away (53–57%), gone until next */
+@keyframes oliveCycle { 0% { transform: scale(0) rotate(0deg); opacity: 0; } 3% { transform: scale(1.12) rotate(0deg); opacity: 1; } 5% { transform: scale(1) rotate(0deg); opacity: 1; } 45% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(1) rotate(-13deg); opacity: 1; } 53% { transform: scale(1) rotate(-13deg); opacity: 1; } 57% { transform: scale(0) rotate(-13deg); opacity: 0; } 100% { transform: scale(0) rotate(-13deg); opacity: 0; } }
+@keyframes oPoof { 0% { opacity: 0; transform: translate(-50%, 0) scale(0.3); } 2% { opacity: 1; transform: translate(-50%, 0) scale(0.78); } 7% { opacity: 0; transform: translate(-50%, 0) scale(1.15); } 52% { opacity: 0; transform: translate(-50%, 0) scale(0.3); } 54% { opacity: 1; transform: translate(-50%, 0) scale(0.78); } 60% { opacity: 0; transform: translate(-50%, 0) scale(1.15); } 100% { opacity: 0; transform: translate(-50%, 0) scale(1.15); } }
+@keyframes oWag { from { transform: translateX(-7260px); } to { transform: translateX(-11616px); } }
+@media (prefers-reduced-motion: reduce) { .olive-pop, .olive-poof, .olive-strip { animation: none; } .olive-strip { transform: translateX(-7260px); } }
 
 /* arriving via Home: land settled & steady — no intro replay */
 .instant .video-frame { animation: none !important; transform: scale(0); opacity: 0; }
@@ -517,6 +485,6 @@ const css = `
   .hero-subtitle, .hero-tagline { max-width: none; }
   .hero-actions { justify-content: center; }
   .video-frame { transform: rotate(0); margin: 0 auto; box-shadow: 6px 8px 0 var(--brown); }
-  .olive-viewport { transform: scale(0.42); transform-origin: left bottom; }
+  .olive-viewport { transform: scale(0.42); transform-origin: bottom center; }
 }
 `;
