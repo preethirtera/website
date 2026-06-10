@@ -226,8 +226,8 @@ export default function Hero({
         </div>
       </div>
 
-      {/* Olive poofs in and sits, wagging her tail — only after the intro centers */}
-      {active && (
+      {/* Olive poofs in and sits, wagging her tail — only after the headline finishes typing */}
+      {done && (
         <div className="olive-runner" aria-hidden="true">
           <span className="olive-poof" />
           <div className="olive-pop"><div className="olive-viewport"><div className="olive-strip" /></div></div>
@@ -461,12 +461,12 @@ const css = `
 
 /* ---------- OLIVE RUNNER (transparent sprite, JS-driven) ---------- */
 .olive-runner { position: absolute; left: 50%; bottom: 6px; z-index: 3; pointer-events: none; transform: translateX(-50%); }
-.olive-poof { position: absolute; left: 50%; bottom: -26px; width: 230px; height: 230px; transform: translate(-50%, 0) scale(0.3); opacity: 0; z-index: 2; background: url('/poof.svg?v=2') center / contain no-repeat; animation: oPoof 10s ease-out infinite; }
+.olive-poof { position: absolute; left: 50%; bottom: -14px; width: 172px; height: 172px; transform: translate(-50%, 0) scale(0.3); opacity: 0; z-index: 2; background: url('/poof.svg?v=2') center / contain no-repeat; animation: oPoof 10s ease-out infinite; }
 .olive-pop { position: relative; z-index: 1; transform-origin: bottom center; animation: oliveCycle 10s ease-in-out infinite; }
-.olive-viewport { width: 363px; height: 240px; overflow: hidden; transform: scale(0.58); transform-origin: bottom center; }
+.olive-viewport { width: 363px; height: 240px; overflow: hidden; transform: scale(0.42); transform-origin: bottom center; }
 .olive-strip { width: 11616px; height: 240px; background: url('/olive-run.png?v=7') 0 0 / 11616px 240px; transform: translateX(-7260px); animation: oWag 2s steps(12) infinite; }
-/* 10s loop: poof in (0–5%), sit & wag x2 (5–45%), tilt head (45–53%), poof away (53–57%), gone until next */
-@keyframes oliveCycle { 0% { transform: scale(0) rotate(0deg); opacity: 0; } 3% { transform: scale(1.12) rotate(0deg); opacity: 1; } 5% { transform: scale(1) rotate(0deg); opacity: 1; } 45% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(1) rotate(-13deg); opacity: 1; } 53% { transform: scale(1) rotate(-13deg); opacity: 1; } 57% { transform: scale(0) rotate(-13deg); opacity: 0; } 100% { transform: scale(0) rotate(-13deg); opacity: 0; } }
+/* 10s loop: poof in (0–5%), sit & wag (5–50%), poof away (50–55%), gone until next */
+@keyframes oliveCycle { 0% { transform: scale(0); opacity: 0; } 3% { transform: scale(1.12); opacity: 1; } 5% { transform: scale(1); opacity: 1; } 50% { transform: scale(1); opacity: 1; } 55% { transform: scale(0); opacity: 0; } 100% { transform: scale(0); opacity: 0; } }
 @keyframes oPoof { 0% { opacity: 0; transform: translate(-50%, 0) scale(0.3); } 2% { opacity: 1; transform: translate(-50%, 0) scale(0.78); } 7% { opacity: 0; transform: translate(-50%, 0) scale(1.15); } 52% { opacity: 0; transform: translate(-50%, 0) scale(0.3); } 54% { opacity: 1; transform: translate(-50%, 0) scale(0.78); } 60% { opacity: 0; transform: translate(-50%, 0) scale(1.15); } 100% { opacity: 0; transform: translate(-50%, 0) scale(1.15); } }
 @keyframes oWag { from { transform: translateX(-7260px); } to { transform: translateX(-11616px); } }
 @media (prefers-reduced-motion: reduce) { .olive-pop, .olive-poof, .olive-strip { animation: none; } .olive-strip { transform: translateX(-7260px); } }
@@ -485,6 +485,6 @@ const css = `
   .hero-subtitle, .hero-tagline { max-width: none; }
   .hero-actions { justify-content: center; }
   .video-frame { transform: rotate(0); margin: 0 auto; box-shadow: 6px 8px 0 var(--brown); }
-  .olive-viewport { transform: scale(0.42); transform-origin: bottom center; }
+  .olive-viewport { transform: scale(0.32); transform-origin: bottom center; }
 }
 `;
