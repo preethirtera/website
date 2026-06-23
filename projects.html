@@ -3,212 +3,95 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Selected Work — Preethi</title>
+<title>Selected Work — Preethi Tera</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --cream:  #FFEDA1;
-    --red:    #FF2E2E;
-    --brown:  #372020;
-    --blue:   #9FBFFF;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--cream);
-    color: var(--brown);
-    font-family: 'Montserrat', system-ui, sans-serif;
-  }
-
-  /* ---------- GLOBAL BAR ---------- */
-  .global-bar {
-    position: fixed; top: 0; left: 0; right: 0; height: 64px; z-index: 90;
-    background: var(--brown);
-    display: flex; align-items: center; justify-content: flex-end;
-    padding: 0 clamp(24px, 5vw, 72px);
-    box-shadow: 0 4px 12px rgba(55, 32, 32, 0.22);
-  }
-  .global-bar__brand { color: var(--cream); font-weight: 700; font-size: 15px; letter-spacing: 0.04em; text-decoration: none; }
-  .global-nav { display: flex; gap: clamp(22px, 2.5vw, 38px); }
-  .global-nav a {
-    position: relative; color: rgba(255, 237, 161, 0.72);
-    font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em;
-    text-decoration: none; transition: color 0.25s ease;
-  }
-  .global-nav a::after { content: ""; position: absolute; left: 0; bottom: -5px; height: 1px; width: 0; background: var(--cream); transition: width 0.25s ease; }
-  .global-nav a.is-current, .global-nav a:hover { color: var(--cream); }
-  .global-nav a.is-current::after, .global-nav a:hover::after { width: 100%; }
-
-  /* ---------- SECTION ---------- */
-  .projects {
-    padding: calc(64px + clamp(48px, 9vh, 110px)) clamp(18px, 4vw, 80px) 28vh;
-  }
-  .projects__head {
-    max-width: 1200px;
-    margin: 0 auto clamp(28px, 5vh, 56px);
-  }
-  .projects__eyebrow {
-    margin: 0 0 8px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(55, 32, 32, 0.55);
-  }
-  .projects__title {
-    margin: 0;
-    font-size: clamp(34px, 6vw, 68px);
-    font-weight: 800;
-    letter-spacing: -0.5px;
-  }
-
-  /* ---------- STICKY STACK ---------- */
-  .stack { max-width: 1200px; margin: 0 auto; }
-
-  .card {
-    position: sticky;
-    display: flex;
-    align-items: center;
-    gap: clamp(20px, 4vw, 56px);
-    width: 100%;
-    min-height: clamp(180px, 26vh, 250px);
-    padding: clamp(28px, 4vw, 60px);
-    border-radius: 3rem;
-    margin-bottom: 42vh;                 /* scroll distance before the next card stacks */
-    box-shadow: 0 14px 40px rgba(55, 32, 32, 0.16);
-    transition: box-shadow 0.3s ease;
-    transform-origin: 50% 0%;            /* shrinks back from the top as it gets covered */
-    will-change: transform;
-  }
-  .card:last-child { margin-bottom: 4vh; }
-
-  /* increasing offsets = each card stops a touch lower, leaving a peek of the one behind */
-  .card:nth-child(1) { top: clamp(80px, 10vh, 120px);  background: var(--blue);  color: var(--brown); }
-  .card:nth-child(2) { top: clamp(104px, 13vh, 152px); background: var(--red);   color: var(--cream); }
-  .card:nth-child(3) { top: clamp(128px, 16vh, 184px); background: var(--cream); color: var(--brown);
-                       border: 4px solid var(--brown); box-shadow: 8px 12px 0 var(--brown); }
-
-  /* ---------- CARD CONTENT ---------- */
-  .card__left { flex: 1 1 auto; min-width: 0; }
-  .card__index {
-    margin: 0 0 6px;
-    font-size: clamp(13px, 1.2vw, 15px);
-    font-weight: 700;
-    opacity: 0.65;
-    letter-spacing: 0.08em;
-  }
-  .card__title {
-    margin: 0;
-    font-size: clamp(30px, 4.6vw, 60px);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.5px;
-  }
-  .card__desc {
-    margin: 10px 0 0;
-    font-size: clamp(14px, 1.4vw, 17px);
-    font-weight: 600;
-    opacity: 0.8;
-  }
-
-  .card__tags { display: flex; gap: 10px; flex-shrink: 0; }
-  .tag {
-    border: 2px solid currentColor;
-    border-radius: 999px;
-    padding: 8px 16px;
-    font-size: clamp(12px, 1.1vw, 14px);
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  .card__view {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: clamp(16px, 1.6vw, 20px);
-    font-weight: 700;
-    white-space: nowrap;
-    text-decoration: none;
-    color: inherit;
-  }
-  .card__view .arrow { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1); }
-  .card:hover .card__view .arrow { transform: translateX(6px); }
-  .card:hover { box-shadow: 0 20px 52px rgba(55, 32, 32, 0.24); }
-  .card:nth-child(3):hover { box-shadow: 11px 15px 0 var(--brown); }
-
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width: 760px) {
-    .card {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 18px;
-      min-height: 0;
-      border-radius: 2.2rem;
-      margin-bottom: 36vh;
-    }
-    .card__tags { flex-wrap: wrap; }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+        colors: { cream: '#FFEDA1', espresso: '#372020', corn: '#9FBFFF', poppy: '#FF2E2E' },
+      },
+    },
+  };
+</script>
 </head>
-<body>
+<body class="bg-cream font-sans text-espresso">
 
-  <header class="global-bar">
-    <nav class="global-nav">
-      <a href="index.html?home">Home</a>
-      <a href="about.html">About</a>
-      <a href="coming-soon.html">Work</a>
-      <a href="coming-soon.html">Play</a>
-      <a href="contact.html">Contact</a>
+  <!-- ============ GLOBAL NAV BAR ============ -->
+  <header class="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-end bg-espresso px-8 sm:px-12 shadow-[0_4px_12px_rgba(55,32,32,0.22)]">
+    <nav class="flex gap-6 sm:gap-9 text-[12px] font-semibold uppercase tracking-[0.18em]">
+      <a href="index.html?home" class="text-cream/70 transition-colors hover:text-cream">Home</a>
+      <a href="about.html" class="text-cream/70 transition-colors hover:text-cream">About</a>
+      <a href="coming-soon.html" class="text-cream transition-colors hover:text-cream">Work</a>
+      <a href="coming-soon.html" class="text-cream/70 transition-colors hover:text-cream">Play</a>
+      <a href="contact.html" class="text-cream/70 transition-colors hover:text-cream">Contact</a>
     </nav>
   </header>
 
-  <section class="projects">
-    <div class="projects__head">
-      <p class="projects__eyebrow">Selected Work</p>
-      <h2 class="projects__title">Things I&rsquo;ve built.</h2>
+  <!-- ============ PROJECTS ============ -->
+  <section class="px-5 sm:px-10 lg:px-20 pt-28 pb-[28vh]">
+
+    <div class="mx-auto mb-10 sm:mb-16 max-w-[1200px]">
+      <p class="mb-2 text-[13px] font-bold uppercase tracking-[0.25em] text-espresso/55">Selected Work</p>
+      <h2 class="m-0 text-4xl sm:text-6xl font-extrabold tracking-tight">Things I&rsquo;ve built.</h2>
     </div>
 
-    <div class="stack">
-      <article class="card">
-        <div class="card__left">
-          <p class="card__index">01</p>
-          <h3 class="card__title">Aeqos</h3>
-          <p class="card__desc">AI Housing Data App</p>
+    <div class="mx-auto max-w-[1200px]">
+
+      <!-- CARD 1 — Aeqos -->
+      <article class="card group sticky top-[88px] mb-[40vh] flex min-h-[210px] w-full items-center gap-6 overflow-hidden rounded-[3rem] border-4 border-espresso bg-corn p-8 text-espresso shadow-[10px_12px_0px_0px_#372020] [transform-origin:50%_0%] will-change-transform sm:gap-12 sm:p-14">
+        <img src="#" alt="Aeqos preview" class="absolute inset-0 h-full w-full rounded-[3rem] object-cover opacity-0 transition-opacity duration-[400ms] ease-in-out group-hover:opacity-100" />
+        <div class="relative z-10 flex w-full items-center gap-6 transition-colors duration-[400ms] ease-in-out group-hover:text-[#FFEDA1] sm:gap-12">
+          <div class="min-w-0 flex-1">
+            <p class="mb-1.5 text-sm font-bold tracking-wide opacity-65">01</p>
+            <h3 class="text-3xl font-extrabold leading-none tracking-tight sm:text-5xl">Aeqos</h3>
+            <p class="mt-2 text-sm font-semibold opacity-80 sm:text-base">AI Housing Data App</p>
+          </div>
+          <div class="hidden flex-shrink-0 gap-2.5 sm:flex">
+            <span class="whitespace-nowrap rounded-full border-2 border-current px-4 py-2 text-xs font-semibold sm:text-sm">UI / UX</span>
+            <span class="whitespace-nowrap rounded-full border-2 border-current px-4 py-2 text-xs font-semibold sm:text-sm">Data Viz</span>
+          </div>
+          <a href="aeqos.html" class="inline-flex flex-shrink-0 items-center gap-2 whitespace-nowrap text-lg font-bold sm:text-xl">View <span class="transition-transform group-hover:translate-x-1.5">&rarr;</span></a>
         </div>
-        <div class="card__tags">
-          <span class="tag">UI / UX</span>
-          <span class="tag">Data Viz</span>
-        </div>
-        <a class="card__view" href="#">View <span class="arrow">&rarr;</span></a>
       </article>
 
-      <article class="card">
-        <div class="card__left">
-          <p class="card__index">02</p>
-          <h3 class="card__title">Vayu</h3>
-          <p class="card__desc">Digital Product</p>
+      <!-- CARD 2 — Beacons -->
+      <article class="card group sticky top-[108px] mb-[40vh] flex min-h-[210px] w-full items-center gap-6 overflow-hidden rounded-[3rem] border-4 border-espresso bg-poppy p-8 text-cream shadow-[10px_12px_0px_0px_#372020] [transform-origin:50%_0%] will-change-transform sm:gap-12 sm:p-14">
+        <img src="#" alt="Beacons preview" class="absolute inset-0 h-full w-full rounded-[3rem] object-cover opacity-0 transition-opacity duration-[400ms] ease-in-out group-hover:opacity-100" />
+        <div class="relative z-10 flex w-full items-center gap-6 transition-colors duration-[400ms] ease-in-out group-hover:text-[#FFEDA1] sm:gap-12">
+          <div class="min-w-0 flex-1">
+            <p class="mb-1.5 text-sm font-bold tracking-wide opacity-70">02</p>
+            <h3 class="text-3xl font-extrabold leading-none tracking-tight sm:text-5xl">Beacons</h3>
+            <p class="mt-2 text-sm font-semibold opacity-85 sm:text-base">Digital Product</p>
+          </div>
+          <div class="hidden flex-shrink-0 gap-2.5 sm:flex">
+            <span class="whitespace-nowrap rounded-full border-2 border-current px-4 py-2 text-xs font-semibold sm:text-sm">Product Design</span>
+            <span class="whitespace-nowrap rounded-full border-2 border-current px-4 py-2 text-xs font-semibold sm:text-sm">Prototyping</span>
+          </div>
+          <a href="#" class="inline-flex flex-shrink-0 items-center gap-2 whitespace-nowrap text-lg font-bold sm:text-xl">View <span class="transition-transform group-hover:translate-x-1.5">&rarr;</span></a>
         </div>
-        <div class="card__tags">
-          <span class="tag">Product Design</span>
-          <span class="tag">Prototyping</span>
-        </div>
-        <a class="card__view" href="#">View <span class="arrow">&rarr;</span></a>
       </article>
 
-      <article class="card">
-        <div class="card__left">
-          <p class="card__index">03</p>
-          <h3 class="card__title">Mosaic41</h3>
-          <p class="card__desc">Urban Spatial System</p>
+      <!-- CARD 3 — Pulsetrace -->
+      <article class="card group sticky top-[128px] mb-[8vh] flex min-h-[210px] w-full items-center gap-6 overflow-hidden rounded-[3rem] border-4 border-espresso bg-cream p-8 text-espresso shadow-[10px_12px_0px_0px_#372020] [transform-origin:50%_0%] will-change-transform sm:gap-12 sm:p-14">
+        <img src="#" alt="Pulsetrace preview" class="absolute inset-0 h-full w-full rounded-[3rem] object-cover opacity-0 transition-opacity duration-[400ms] ease-in-out group-hover:opacity-100" />
+        <div class="relative z-10 flex w-full items-center gap-6 transition-colors duration-[400ms] ease-in-out group-hover:text-[#FFEDA1] sm:gap-12">
+          <div class="min-w-0 flex-1">
+            <p class="mb-1.5 text-sm font-bold tracking-wide opacity-65">03</p>
+            <h3 class="text-3xl font-extrabold leading-none tracking-tight sm:text-5xl">Pulsetrace</h3>
+            <p class="mt-2 text-sm font-semibold opacity-80 sm:text-base">Data Platform</p>
+          </div>
+          <div class="hidden flex-shrink-0 gap-2.5 sm:flex">
+            <span class="whitespace-nowrap rounded-full border-2 border-current px-4 py-2 text-xs font-semibold sm:text-sm">Product Design</span>
+            <span class="whitespace-nowrap rounded-full border-2 border-current px-4 py-2 text-xs font-semibold sm:text-sm">Data Viz</span>
+          </div>
+          <a href="#" class="inline-flex flex-shrink-0 items-center gap-2 whitespace-nowrap text-lg font-bold sm:text-xl">View <span class="transition-transform group-hover:translate-x-1.5">&rarr;</span></a>
         </div>
-        <div class="card__tags">
-          <span class="tag">Spatial Design</span>
-          <span class="tag">Urban Design</span>
-        </div>
-        <a class="card__view" href="#">View <span class="arrow">&rarr;</span></a>
       </article>
+
     </div>
   </section>
 
@@ -221,8 +104,7 @@
           const card = cards[i], next = cards[i + 1];
           if (!next) { card.style.transform = 'scale(1)'; continue; }
           const dist = next.getBoundingClientRect().top - card.getBoundingClientRect().top;
-          const start = card.offsetHeight;  // begin shrinking when next is ~a card below
-          const end = 28;                   // fully stacked (the peek)
+          const start = card.offsetHeight, end = 28;
           let p = (start - dist) / (start - end);
           p = Math.max(0, Math.min(1, p));
           card.style.transform = 'scale(' + (1 - p * 0.06).toFixed(4) + ')';

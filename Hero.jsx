@@ -226,8 +226,8 @@ export default function Hero({
         </div>
       </div>
 
-      {/* Olive poofs in and sits, wagging her tail — only after the headline finishes typing */}
-      {done && (
+      {/* Olive poofs in and sits — only after the blue burst (text typed out + centered) */}
+      {active && (
         <div className="olive-runner" aria-hidden="true">
           <span className="olive-poof" />
           <div className="olive-pop"><div className="olive-viewport"><div className="olive-strip" /></div></div>
