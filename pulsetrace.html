@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pulsetrace — Case Study — Preethi Tera</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          display: ['"Playfair Display"', 'Georgia', 'serif'],
+        },
+        colors: { cream: '#FFEDA1', espresso: '#372020', corn: '#9FBFFF', poppy: '#FF2E2E' },
+      },
+    },
+  };
+</script>
+</head>
+<body class="bg-cream font-sans text-espresso">
+
+  <!-- ============ GLOBAL NAV BAR ============ -->
+  <header class="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-end bg-espresso px-8 sm:px-12 shadow-[0_4px_12px_rgba(55,32,32,0.22)]">
+    <nav class="flex gap-6 sm:gap-9 text-[12px] font-semibold uppercase tracking-[0.18em]">
+      <a href="index.html?home" class="text-cream/70 transition-colors hover:text-cream">Home</a>
+      <a href="about.html" class="text-cream/70 transition-colors hover:text-cream">About</a>
+      <a href="coming-soon.html" class="text-cream transition-colors hover:text-cream">Work</a>
+      <a href="coming-soon.html" class="text-cream/70 transition-colors hover:text-cream">Play</a>
+      <a href="contact.html" class="text-cream/70 transition-colors hover:text-cream">Contact</a>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-[1280px] px-5 sm:px-10 lg:px-16 pt-24">
+
+    <!-- ============ 1. HEADER + METADATA ============ -->
+    <header class="pt-12 pb-10">
+      <p class="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-espresso/55">Case Study — Data Platform</p>
+      <h1 class="font-black uppercase leading-[0.9] tracking-tight text-[22vw] md:text-[16vw]">Pulsetrace</h1>
+    </header>
+
+    <!-- Metadata grid: 3 columns split by 2px espresso borders -->
+    <dl class="grid grid-cols-1 border-y-2 border-espresso sm:grid-cols-3 sm:divide-x-2 sm:divide-espresso">
+      <div class="border-b-2 border-espresso px-1 py-6 sm:border-b-0 sm:px-6">
+        <dt class="mb-2 text-[11px] font-bold uppercase tracking-[0.22em] text-espresso/55">[ Timeline ]</dt>
+        <dd class="text-xl font-bold sm:text-2xl">4 Weeks</dd>
+      </div>
+      <div class="border-b-2 border-espresso px-1 py-6 sm:border-b-0 sm:px-6">
+        <dt class="mb-2 text-[11px] font-bold uppercase tracking-[0.22em] text-espresso/55">[ Role ]</dt>
+        <dd class="text-xl font-bold sm:text-2xl">UX / UI Design</dd>
+      </div>
+      <div class="px-1 py-6 sm:px-6">
+        <dt class="mb-2 text-[11px] font-bold uppercase tracking-[0.22em] text-espresso/55">[ Tools ]</dt>
+        <dd class="text-xl font-bold sm:text-2xl">Figma, Illustrator</dd>
+      </div>
+    </dl>
+
+    <!-- ============ 2. OVERVIEW ============ -->
+    <section class="border-t-4 border-espresso py-24">
+      <h2 class="mb-8 text-sm font-bold uppercase tracking-[0.28em] text-espresso/55">Project Overview</h2>
+      <p class="max-w-4xl font-display text-2xl leading-relaxed sm:text-3xl sm:leading-relaxed">[ EDIT — Pulsetrace overview. ] Describe what Pulsetrace is, who it's for, and the core problem it solves in two or three sentences.</p>
+    </section>
+
+    <!-- ============ 3. FEATURES + UI GALLERY (SPLIT) ============ -->
+    <section class="border-t-4 border-espresso py-24">
+      <div class="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-20">
+
+        <!-- LEFT — the details -->
+        <div class="flex flex-col gap-12">
+          <p class="text-sm font-bold uppercase tracking-[0.28em] text-espresso/55">Core AI Features</p>
+
+          <div>
+            <h3 class="mb-3 text-2xl font-extrabold tracking-tight sm:text-3xl">Feature One</h3>
+            <p class="max-w-lg text-base leading-relaxed text-espresso/85 sm:text-lg">[ EDIT ] [ EDIT — add your copy here. ] Replace this placeholder with a clear, specific description of the project, the problem it solved, and the impact.</p>
+          </div>
+
+          <div>
+            <h3 class="mb-3 text-2xl font-extrabold tracking-tight sm:text-3xl">Feature Two</h3>
+            <p class="max-w-lg text-base leading-relaxed text-espresso/85 sm:text-lg">[ EDIT ] [ EDIT — add your copy here. ] Replace this placeholder with a clear, specific description of the project, the problem it solved, and the impact.</p>
+          </div>
+
+          <div>
+            <h3 class="mb-3 text-2xl font-extrabold tracking-tight sm:text-3xl">Design System</h3>
+            <p class="max-w-lg text-base leading-relaxed text-espresso/85 sm:text-lg">[ EDIT ] Note the high-contrast, brutalist approach: heavy borders, bold typography, and accessibility-first contrast.</p>
+          </div>
+        </div>
+
+        <!-- RIGHT — asymmetrical dark UI gallery -->
+        <div class="grid grid-cols-2 gap-5">
+          <!-- tall feature shot -->
+          <figure class="relative col-span-2 row-span-2 aspect-[4/3] overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
+            <img src="#" alt="Pulsetrace — main interface" onerror="this.style.display='none'" class="absolute inset-0 h-full w-full object-cover" />
+            <figcaption class="absolute inset-0 flex items-center justify-center text-xs font-semibold uppercase tracking-[0.25em] text-cream/40">Main Interface</figcaption>
+          </figure>
+
+          <figure class="relative aspect-square overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
+            <img src="#" alt="Pulsetrace — chatbot" onerror="this.style.display='none'" class="absolute inset-0 h-full w-full object-cover" />
+            <figcaption class="absolute inset-0 flex items-center justify-center text-[10px] font-semibold uppercase tracking-[0.22em] text-cream/40">Detail One</figcaption>
+          </figure>
+
+          <figure class="relative aspect-square overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
+            <img src="#" alt="Pulsetrace — map view" onerror="this.style.display='none'" class="absolute inset-0 h-full w-full object-cover" />
+            <figcaption class="absolute inset-0 flex items-center justify-center text-[10px] font-semibold uppercase tracking-[0.22em] text-cream/40">Detail Two</figcaption>
+          </figure>
+
+          <figure class="relative col-span-2 aspect-[16/9] overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
+            <img src="#" alt="Pulsetrace — data dashboard" onerror="this.style.display='none'" class="absolute inset-0 h-full w-full object-cover" />
+            <figcaption class="absolute inset-0 flex items-center justify-center text-xs font-semibold uppercase tracking-[0.25em] text-cream/40">Overview Shot</figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ FOOTER NAV ============ -->
+    <section class="border-t-4 border-espresso py-16">
+      <a href="projects.html" class="group inline-flex items-center gap-3 text-lg font-bold uppercase tracking-[0.18em]">
+        <span aria-hidden="true" class="transition-transform group-hover:-translate-x-1">&larr;</span> Back to Work
+      </a>
+    </section>
+
+  </main>
+
+</body>
+</html>

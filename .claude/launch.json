@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "website",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "python3 -m http.server \"${PORT:-8000}\""],
+      "port": 8000,
+      "autoPort": true
+    },
+    {
+      "name": "raincheck",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "npm run dev --prefix /Users/preethitera/raincheck -- --port \"${PORT:-5180}\" --strictPort"],
+      "port": 5180,
+      "autoPort": true
+    }
+  ]
+}
