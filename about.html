@@ -65,7 +65,7 @@
   .about {
     max-width: 1280px;
     margin: 0 auto;
-    padding: calc(var(--bar-h) + clamp(40px, 7vh, 96px)) clamp(22px, 5vw, 80px) clamp(80px, 14vh, 180px);
+    padding: calc(var(--bar-h) + clamp(32px, 5vh, 64px)) clamp(22px, 5vw, 80px) clamp(40px, 6vh, 72px);
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
     gap: clamp(32px, 6vw, 96px);
@@ -163,28 +163,6 @@
   .shot:nth-child(2) { width: 72%; align-self: flex-start; margin-left: 4%; margin-top: clamp(-30px, -3vw, -14px); }
   .shot:nth-child(3) { width: 66%; align-self: flex-end; margin-right: 6%; margin-top: clamp(-26px, -2.5vw, -12px); }
 
-  /* ---------- RESUME (sits in flow at the bottom of the page) ---------- */
-  .resume-dock {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 clamp(22px, 5vw, 80px) clamp(48px, 9vh, 110px);
-  }
-  .resume {
-    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-    padding: 12px 24px;
-    background: var(--blue); color: var(--brown);
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px; font-weight: 700;
-    text-decoration: none;
-    border: 3px solid var(--brown);
-    border-radius: 999px;
-    box-shadow: 5px 6px 0 var(--brown);
-    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
-  }
-  .resume:hover { transform: translateY(-3px); box-shadow: 7px 9px 0 var(--brown); }
-  .resume:active { transform: translateY(1px); box-shadow: 3px 4px 0 var(--brown); }
-  .resume svg { width: 16px; height: 16px; }
-
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 860px) {
     .about { grid-template-columns: 1fr; gap: 44px; }
@@ -252,16 +230,6 @@
     </section>
 
   </main>
-
-  <!-- RESUME — sits at the bottom of the page, aligned with the text -->
-  <div class="resume-dock">
-    <a class="resume" href="Preethi-Reddy-Tera-Resume.pdf" download>
-      Download PDF resume
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 3v12" /><path d="M7 11l5 5 5-5" /><path d="M5 21h14" />
-      </svg>
-    </a>
-  </div>
 
 </body>
 </html>

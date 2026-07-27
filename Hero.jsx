@@ -248,7 +248,6 @@ const css = `
   box-sizing: border-box;
   padding: clamp(24px, 5vw, 72px);
   overflow: hidden;
-  cursor: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='36'%20height='36'%20viewBox='0%200%2036%2036'%3E%3Cpath%20d='M7%204%20L7%2027%20L13%2021%20L16.5%2029%20L20%2027.3%20L16.5%2019.5%20L23%2019.5%20Z'%20fill='%23FFFFFF'%20stroke='%23372020'%20stroke-width='2.4'%20stroke-linejoin='round'%20stroke-linecap='round'/%3E%3C/svg%3E") 7 4, auto;
 }
 
 .hero-inner {
