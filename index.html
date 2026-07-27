@@ -13,13 +13,28 @@ body{background:#FFEDA1}
 .scrollbar{position:fixed;top:0;left:0;right:0;height:5px;z-index:2000;background:rgba(55,32,32,0.12);pointer-events:none}
 .scrollbar__fill{height:100%;width:100%;background:var(--red);transform-origin:0 50%;transform:scaleX(0)}
 .projects *{box-sizing:border-box}
-.projects{font-family:'Montserrat',system-ui,sans-serif;color:var(--brown);padding:clamp(48px,9vh,110px) clamp(18px,4vw,80px) 4vh}
-.projects__head{max-width:1200px;margin:0 auto clamp(28px,5vh,56px)}
-.projects__eyebrow{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(55,32,32,0.55)}
-.projects__title{margin:0;font-size:clamp(34px,6vw,68px);font-weight:800;letter-spacing:-0.5px}
-.stack{max-width:1200px;margin:0 auto}
+.projects{font-family:'Montserrat',system-ui,sans-serif;color:var(--brown);padding:clamp(48px,9vh,110px) clamp(18px,4vw,80px) 4vh;position:relative}
+/* wandering little critters */
+.critters-layer{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.critter{position:absolute;left:0;width:clamp(26px,2.5vw,40px);opacity:0.82;will-change:transform;animation:wander var(--dur,32s) linear var(--delay,0s) infinite}
+.critter svg{display:block;width:100%;height:auto;animation:floaty 3.2s ease-in-out infinite}
+@keyframes wander{0%{transform:translateX(-14vw)}50%{transform:translateX(110vw)}100%{transform:translateX(-14vw)}}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.critter{display:none}}
+.projects__head{max-width:1040px;margin:0 auto clamp(24px,4vh,44px)}
+.projects__eyebrow{margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(55,32,32,0.55)}
+.projects__title{margin:0;font-size:clamp(28px,4.4vw,50px);font-weight:800;letter-spacing:-0.5px}
+.stack{max-width:1040px;margin:0 auto}
 .stack::after{content:"";display:block;height:18vh}
-.card{position:sticky;display:flex;align-items:center;gap:clamp(20px,4vw,56px);width:100%;min-height:clamp(180px,26vh,250px);padding:clamp(28px,4vw,60px);border-radius:3rem;margin-top:42vh;transition:box-shadow 0.3s ease;transform-origin:50% 0%;will-change:transform}
+.card{position:sticky;display:flex;flex-direction:column;justify-content:center;width:100%;min-height:clamp(130px,17vh,178px);padding:clamp(20px,2.6vw,40px);border-radius:2.2rem;margin-top:42vh;transition:box-shadow 0.3s ease;transform-origin:50% 0%;will-change:transform;cursor:pointer}
+.card__main{display:flex;align-items:center;gap:clamp(16px,2.6vw,36px);width:100%}
+/* expand accordion detail */
+.card__detail{max-height:0;overflow:hidden;opacity:0;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,2vw,28px);transition:max-height 0.45s ease, opacity 0.3s ease, margin-top 0.45s ease}
+.card.is-open .card__detail{max-height:340px;opacity:1;margin-top:clamp(14px,2vh,26px)}
+.card__summary{margin:0;flex:1 1 260px;min-width:0;font-size:clamp(14px,1.25vw,16px);font-weight:600;line-height:1.5;opacity:0.9}
+.card__detailimg{width:clamp(140px,18vw,220px);height:auto;border:3px solid var(--brown);border-radius:12px;box-shadow:5px 6px 0 var(--brown);flex-shrink:0}
+.card__cue{position:absolute;top:clamp(16px,2vw,26px);right:clamp(20px,2.6vw,40px);font-size:20px;font-weight:700;line-height:1;opacity:0.5;transition:transform 0.35s ease}
+.card.is-open .card__cue{transform:rotate(45deg)}
 .card:first-child{margin-top:0}
 .card:nth-child(1){top:clamp(80px,10vh,120px);background:var(--blue);color:var(--brown);box-shadow:8px 12px 0 #5C79C7}
 .card:nth-child(2){top:clamp(104px,13vh,152px);background:var(--red);color:var(--cream);box-shadow:8px 12px 0 #A31212}
@@ -29,11 +44,11 @@ body{background:#FFEDA1}
 .card:nth-child(6){top:clamp(200px,25vh,280px);background:var(--brown);color:var(--cream);box-shadow:8px 12px 0 #1A0E0E}
 .card__left{flex:1 1 auto;min-width:0}
 .card__index{margin:0 0 6px;font-size:clamp(13px,1.2vw,15px);font-weight:700;opacity:0.65;letter-spacing:0.08em}
-.card__title{margin:0;font-size:clamp(30px,4.6vw,60px);font-weight:800;line-height:1;letter-spacing:-0.5px}
-.card__desc{margin:10px 0 0;font-size:clamp(14px,1.4vw,17px);font-weight:600;opacity:0.8}
-.card__tags{display:flex;gap:10px;flex-shrink:0}
-.tag{border:2px solid currentColor;border-radius:999px;padding:8px 16px;font-size:clamp(12px,1.1vw,14px);font-weight:600;white-space:nowrap}
-.card__view{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;font-size:clamp(16px,1.6vw,20px);font-weight:700;white-space:nowrap;text-decoration:none;color:inherit}
+.card__title{margin:0;font-size:clamp(24px,3vw,40px);font-weight:800;line-height:1;letter-spacing:-0.5px}
+.card__desc{margin:8px 0 0;font-size:clamp(13px,1.2vw,16px);font-weight:600;opacity:0.8}
+.card__tags{display:flex;gap:8px;flex-shrink:0}
+.tag{border:2px solid currentColor;border-radius:999px;padding:6px 14px;font-size:clamp(11px,1vw,13px);font-weight:600;white-space:nowrap}
+.card__view{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;font-size:clamp(15px,1.3vw,18px);font-weight:700;white-space:nowrap;text-decoration:none;color:inherit}
 .card__view .arrow{transition:transform 0.25s cubic-bezier(0.22,1,0.36,1)}
 .card:hover .card__view .arrow{transform:translateX(6px)}
 .card:nth-child(1):hover,.card:nth-child(4):hover{box-shadow:11px 15px 0 #5C79C7}
@@ -41,39 +56,7 @@ body{background:#FFEDA1}
 .card:nth-child(3):hover{box-shadow:11px 15px 0 var(--brown)}
 @media (max-width:760px){.card{flex-direction:column;align-items:flex-start;gap:18px;min-height:0;border-radius:2.2rem;margin-top:36vh}.card__tags{flex-wrap:wrap}}
 
-/* ===== URBAN DESIGN — horizontal drafting boards (part of Work) ===== */
-.urban{font-family:'Montserrat',system-ui,sans-serif;color:var(--brown);padding:0 0 16vh}
-.urban__head{margin:0 0 clamp(18px,3vh,36px);padding:0 clamp(18px,4vw,80px)}
-.urban__eyebrow{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(55,32,32,0.55)}
-.urban__title{margin:0;font-size:clamp(34px,6vw,68px);font-weight:800;letter-spacing:-0.5px}
-/* pinned horizontal scroll: page scrolls down → track moves sideways */
-.hscroll{position:relative}
-.hscroll__sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;background-image:repeating-linear-gradient(0deg,rgba(55,32,32,0.05) 0 1px,transparent 1px 48px),repeating-linear-gradient(90deg,rgba(55,32,32,0.05) 0 1px,transparent 1px 48px)}
-.hscroll__label{position:absolute;top:clamp(22px,6vh,60px);left:clamp(18px,4vw,80px);z-index:3;pointer-events:none}
-.hscroll__track{display:flex;align-items:center;gap:clamp(18px,2.5vw,36px);padding:0 clamp(18px,4vw,80px);will-change:transform}
-.hscroll__bar{position:fixed;top:64px;left:0;height:5px;width:0;background:var(--red);z-index:95;box-shadow:0 1px 3px rgba(55,32,32,0.25);opacity:0;transition:opacity .25s ease}
-@media (max-width:760px){
-  .hscroll{height:auto!important}
-  .hscroll__sticky{position:static;height:auto;display:block;overflow-x:auto;padding:12px 0 26px}
-  .hscroll__label{position:static;padding:0 18px 10px}
-  .hscroll__track{transform:none!important;padding-bottom:6px}
-  .uboard{height:auto}
-  .uboard__media{flex:none;height:56vw}
-  .hscroll__bar{display:none}
-}
-.uboard{flex:0 0 auto;width:clamp(300px,44vw,560px);height:min(76vh,660px);display:flex;flex-direction:column;background:#FFF7D4;border:4px solid var(--brown);border-radius:22px;box-shadow:10px 12px 0 var(--brown);overflow:hidden;scroll-snap-align:center;transition:transform .35s cubic-bezier(0.22,1,0.36,1),box-shadow .35s ease;text-decoration:none;color:inherit}
-.uboard:hover{transform:translateY(-6px);box-shadow:14px 18px 0 var(--brown)}
-.uboard__media{position:relative;flex:1 1 auto;min-height:0;border-bottom:4px solid var(--brown);background:repeating-linear-gradient(0deg,rgba(55,32,32,0.06) 0 1px,transparent 1px 26px),repeating-linear-gradient(90deg,rgba(55,32,32,0.06) 0 1px,transparent 1px 26px),#F0E6B0;display:flex;align-items:center;justify-content:center}
-.uboard__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.uboard__ph{font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(55,32,32,0.4);font-weight:600}
-.uboard__num{position:absolute;top:12px;left:14px;font-size:12px;font-weight:700;letter-spacing:0.1em;color:var(--brown);background:var(--cream);border:2px solid var(--brown);border-radius:999px;padding:3px 11px;z-index:2}
-.uboard__meta{padding:clamp(16px,2vw,24px)}
-.uboard__title{margin:0;font-size:clamp(22px,2.6vw,34px);font-weight:800;line-height:1;letter-spacing:-0.5px}
-.uboard__loc{margin:8px 0 0;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(55,32,32,0.6);font-weight:600}
-.uboard__tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
-.uboard__tags span{border:2px solid var(--brown);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:600}
-.uboard--more{width:clamp(180px,20vw,240px);background:transparent;border-style:dashed;box-shadow:none;align-items:center;justify-content:center;font-weight:800;text-transform:uppercase;letter-spacing:0.12em}
-.uboard--more:hover{transform:translateY(-6px);box-shadow:none;background:rgba(55,32,32,0.04)}
+
 </style>
 </head>
 <body>
@@ -82,71 +65,104 @@ body{background:#FFEDA1}
 
 <!-- ===== PROJECTS (sticky stacked cards, below the hero) ===== -->
 <section class="projects" id="work">
+  <div class="critters-layer" aria-hidden="true">
+    <!-- ruler -->
+    <div class="critter" style="top:24vh;--dur:34s;--delay:0s">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#372020" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="6" rx="1"/><path d="M6 9v3M10 9v3M14 9v3M18 9v3"/></svg>
+    </div>
+    <!-- set square -->
+    <div class="critter" style="top:132vh;--dur:31s;--delay:-13s">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#372020" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19 20 19 4 6 Z"/><path d="M4 15 8 15 8 19"/></svg>
+    </div>
+    <!-- pencil -->
+    <div class="critter" style="top:186vh;--dur:26s;--delay:-19s">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#372020" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 4.9 15.8 15.4 5.3 18.7 8.6 8.2 19.1 Z"/><path d="M14 6.7 17.3 10"/></svg>
+    </div>
+    <!-- house -->
+    <div class="critter" style="top:238vh;--dur:38s;--delay:-24s">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#372020" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3.5 21 11"/><path d="M5.5 9.6V20H18.5V9.6"/><rect x="10" y="14" width="4" height="6"/></svg>
+    </div>
+  </div>
   <div class="projects__head">
     <p class="projects__eyebrow">Selected Work</p>
     <h2 class="projects__title">Things I&rsquo;ve built.</h2>
   </div>
   <div class="stack">
     <article class="card">
-      <div class="card__left"><p class="card__index">01</p><h3 class="card__title">Aeqos</h3><p class="card__desc">AI Housing Data App</p></div>
-      <div class="card__tags"><span class="tag">UI / UX</span><span class="tag">Data Viz</span></div>
-      <a class="card__view" href="aeqos.html">View <span class="arrow">&rarr;</span></a>
+      <span class="card__cue" aria-hidden="true">+</span>
+      <div class="card__main">
+        <div class="card__left"><p class="card__index">01</p><h3 class="card__title">Aeqos</h3><p class="card__desc">AI Housing Data App</p></div>
+        <div class="card__tags"><span class="tag">UI / UX</span><span class="tag">Data Viz</span></div>
+        <a class="card__view" href="aeqos.html">View <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="card__detail">
+        <p class="card__summary">An AI housing-data app that demystifies the rental search &mdash; surfacing transparent, actionable insights through AI-driven tools.</p>
+        <img class="card__detailimg" src="aeqos-preview.png" alt="" onerror="this.style.display='none'" />
+      </div>
     </article>
     <article class="card">
-      <div class="card__left"><p class="card__index">02</p><h3 class="card__title">Vayu</h3><p class="card__desc">Digital Product</p></div>
-      <div class="card__tags"><span class="tag">Product Design</span><span class="tag">Prototyping</span></div>
-      <a class="card__view" href="#">View <span class="arrow">&rarr;</span></a>
+      <span class="card__cue" aria-hidden="true">+</span>
+      <div class="card__main">
+        <div class="card__left"><p class="card__index">02</p><h3 class="card__title">Vayu</h3><p class="card__desc">Digital Product</p></div>
+        <div class="card__tags"><span class="tag">Product Design</span><span class="tag">Prototyping</span></div>
+        <a class="card__view" href="#">View <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="card__detail">
+        <p class="card__summary">A digital product exploration &mdash; full case study coming soon.</p>
+        <img class="card__detailimg" src="vayu-preview.png" alt="" onerror="this.style.display='none'" />
+      </div>
     </article>
     <article class="card">
-      <div class="card__left"><p class="card__index">03</p><h3 class="card__title">Beacons</h3><p class="card__desc">Digital Product</p></div>
-      <div class="card__tags"><span class="tag">Product Design</span><span class="tag">Prototyping</span></div>
-      <a class="card__view" href="beacons.html">View <span class="arrow">&rarr;</span></a>
+      <span class="card__cue" aria-hidden="true">+</span>
+      <div class="card__main">
+        <div class="card__left"><p class="card__index">03</p><h3 class="card__title">Beacons</h3><p class="card__desc">Digital Product</p></div>
+        <div class="card__tags"><span class="tag">Product Design</span><span class="tag">Prototyping</span></div>
+        <a class="card__view" href="beacons.html">View <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="card__detail">
+        <p class="card__summary">A digital product exploration &mdash; full case study coming soon.</p>
+        <img class="card__detailimg" src="beacons-preview.png" alt="" onerror="this.style.display='none'" />
+      </div>
     </article>
     <article class="card">
-      <div class="card__left"><p class="card__index">04</p><h3 class="card__title">StoryFuel</h3><p class="card__desc">Digital Product</p></div>
-      <div class="card__tags"><span class="tag">UX / UI</span><span class="tag">Storytelling</span></div>
-      <a class="card__view" href="storyfuel.html">View <span class="arrow">&rarr;</span></a>
+      <span class="card__cue" aria-hidden="true">+</span>
+      <div class="card__main">
+        <div class="card__left"><p class="card__index">04</p><h3 class="card__title">StoryFuel</h3><p class="card__desc">Digital Product</p></div>
+        <div class="card__tags"><span class="tag">UX / UI</span><span class="tag">Storytelling</span></div>
+        <a class="card__view" href="storyfuel.html">View <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="card__detail">
+        <p class="card__summary">A storytelling-driven digital product &mdash; full case study coming soon.</p>
+        <img class="card__detailimg" src="storyfuel-preview.png" alt="" onerror="this.style.display='none'" />
+      </div>
     </article>
     <article class="card">
-      <div class="card__left"><p class="card__index">05</p><h3 class="card__title">RainChecks</h3><p class="card__desc">Digital Product</p></div>
-      <div class="card__tags"><span class="tag">Product Design</span><span class="tag">Prototyping</span></div>
-      <a class="card__view" href="https://rainchecks.app">View <span class="arrow">&rarr;</span></a>
+      <span class="card__cue" aria-hidden="true">+</span>
+      <div class="card__main">
+        <div class="card__left"><p class="card__index">05</p><h3 class="card__title">RainChecks</h3><p class="card__desc">Digital Product</p></div>
+        <div class="card__tags"><span class="tag">Product Design</span><span class="tag">Prototyping</span></div>
+        <a class="card__view" href="https://rainchecks.app">View <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="card__detail">
+        <p class="card__summary">A shipped digital product &mdash; live at rainchecks.app.</p>
+        <img class="card__detailimg" src="rainchecks-preview.png" alt="" onerror="this.style.display='none'" />
+      </div>
     </article>
     <article class="card">
-      <div class="card__left"><p class="card__index">06</p><h3 class="card__title">Z2 Enterprise</h3><p class="card__desc">Supply-Chain Risk &amp; Compliance &mdash; Reports</p></div>
-      <div class="card__tags"><span class="tag">Enterprise UX</span><span class="tag">Design System</span></div>
-      <a class="card__view" href="z2-reports.html">View <span class="arrow">&rarr;</span></a>
+      <span class="card__cue" aria-hidden="true">+</span>
+      <div class="card__main">
+        <div class="card__left"><p class="card__index">06</p><h3 class="card__title">Z2 Enterprise</h3><p class="card__desc">Supply-Chain Risk &amp; Compliance &mdash; Reports</p></div>
+        <div class="card__tags"><span class="tag">Enterprise UX</span><span class="tag">Design System</span></div>
+        <a class="card__view" href="z2-reports.html">View <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="card__detail">
+        <p class="card__summary">Designed the entire Reports module for Z2&rsquo;s enterprise supply-chain risk &amp; compliance platform &mdash; used by teams at Qualcomm, Tesla, and Airbus.</p>
+        <img class="card__detailimg" src="z2-report.png" alt="" onerror="this.style.display='none'" />
+      </div>
     </article>
   </div>
 </section>
 
-<!-- ===== URBAN DESIGN (pinned horizontal drafting boards) ===== -->
-<section class="urban">
-  <div class="hscroll" id="hscroll">
-    <div class="hscroll__sticky">
-      <div class="hscroll__bar" id="hscrollBar"></div>
-      <div class="hscroll__label">
-        <p class="urban__eyebrow">Urban Design &amp; Architecture</p>
-        <h2 class="urban__title">Spatial work.</h2>
-      </div>
-      <div class="hscroll__track" id="hscrollTrack">
-        <a class="uboard" href="urban.html">
-          <div class="uboard__media"><span class="uboard__num">01</span><img src="#" alt="Mosaic41" onerror="this.style.display='none'" /><span class="uboard__ph">Project Board</span></div>
-          <div class="uboard__meta"><h3 class="uboard__title">Mosaic41</h3><p class="uboard__loc">Austin, TX &middot; 2024</p><div class="uboard__tags"><span>Urban Design</span><span>Master Plan</span></div></div>
-        </a>
-        <a class="uboard" href="urban.html">
-          <div class="uboard__media"><span class="uboard__num">02</span><img src="#" alt="Project two" onerror="this.style.display='none'" /><span class="uboard__ph">Project Board</span></div>
-          <div class="uboard__meta"><h3 class="uboard__title">[ Project Two ]</h3><p class="uboard__loc">Location &middot; Year</p><div class="uboard__tags"><span>Urban Design</span><span>Studio</span></div></div>
-        </a>
-        <a class="uboard" href="urban.html">
-          <div class="uboard__media"><span class="uboard__num">03</span><img src="#" alt="Project three" onerror="this.style.display='none'" /><span class="uboard__ph">Project Board</span></div>
-          <div class="uboard__meta"><h3 class="uboard__title">[ Project Three ]</h3><p class="uboard__loc">Location &middot; Year</p><div class="uboard__tags"><span>Architecture</span><span>Concept</span></div></div>
-        </a>
-        <a class="uboard uboard--more" href="urban.html">Explore all &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
 
 <script>
   (function () {
@@ -167,35 +183,6 @@ body{background:#FFEDA1}
     update();
   })();
 
-  // pinned horizontal scroll for the urban boards: vertical scroll → sideways motion
-  (function () {
-    const wrap = document.getElementById('hscroll');
-    const track = document.getElementById('hscrollTrack');
-    const bar = document.getElementById('hscrollBar');
-    if (!wrap || !track) return;
-    let dist = 0;
-    function measure() {
-      if (window.innerWidth <= 760) { wrap.style.height = ''; track.style.transform = ''; if (bar) bar.style.width = '0'; dist = 0; return; }
-      dist = Math.max(0, track.scrollWidth - window.innerWidth);
-      wrap.style.height = (dist + window.innerHeight) + 'px';
-      onScroll();
-    }
-    function onScroll() {
-      if (dist <= 0) return;
-      const top = wrap.getBoundingClientRect().top;
-      const p = Math.min(Math.max(-top, 0), dist);
-      track.style.transform = 'translateX(' + (-p) + 'px)';
-      if (bar) {
-        const inView = top <= 0 && -top <= dist;
-        bar.style.opacity = inView ? '1' : '0';
-        bar.style.width = (p / dist * 100) + '%';
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', measure);
-    window.addEventListener('load', measure);
-    measure();
-  })();
 
   // scroll progress bar — sits at the bottom edge of the brown header
   (function () {
@@ -216,6 +203,22 @@ body{background:#FFEDA1}
   })();
 </script>
 
-<script src="hero.js?v=2"></script>
+<script>
+  // click a bar to expand/collapse its detail (the View link still navigates)
+  (function () {
+    const cards = Array.from(document.querySelectorAll('.card'));
+    cards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.card__view')) return; // let "View" navigate
+        const wasOpen = card.classList.contains('is-open');
+        cards.forEach((c) => c.classList.remove('is-open'));
+        if (!wasOpen) card.classList.add('is-open');
+        window.dispatchEvent(new Event('resize')); // re-run the stack scale calc
+      });
+    });
+  })();
+</script>
+
+<script src="hero.js?v=5"></script>
 </body>
 </html>

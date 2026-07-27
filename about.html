@@ -126,6 +126,19 @@
   }
   .bio strong:hover { background-color: rgba(255, 46, 46, 0.10); }
 
+  /* tagged social links */
+  .social-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: clamp(24px, 3.5vh, 38px); }
+  .social-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 2px solid var(--brown); border-radius: 999px;
+    padding: 9px 18px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+    text-decoration: none; color: var(--brown); background: transparent;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+  }
+  .social-tag:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 3px 4px 0 var(--brown); }
+  .social-tag span { transition: transform 0.18s ease; }
+  .social-tag:hover span { transform: translate(2px, -2px); }
+
   /* ---------- RIGHT: STAGGERED PHOTO STACK ---------- */
   .gallery { display: flex; flex-direction: column; }
   .shot {
@@ -190,8 +203,8 @@
     <nav class="global-nav">
       <a href="index.html?home">Home</a>
       <a href="about.html" class="is-current">About</a>
-      <a href="coming-soon.html">Work</a>
-      <a href="coming-soon.html">Play</a>
+      <a href="index.html?home#work">Work</a>
+      <a href="urban.html">Play</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
@@ -223,6 +236,12 @@
       <p>When I&rsquo;m not working, I <strong>travel</strong> as much as I possibly can. Recently, that&rsquo;s looked like wandering around <strong>Japan and Paris</strong> with my sister, working remotely from the beach in <strong>Costa Rica</strong>, or catching a flight up to <strong>Toronto</strong>.</p>
 
       <p>Back home in Austin, I like to keep just as busy. You can usually find me sweating it out at <strong>[solidcore]</strong> or <strong>SoulCycle</strong>, taking a pottery class, or exploring a new trail with friends. And no matter what I'm doing, I'm almost always hanging out with my <strong>Australian Shepherd, Olive</strong>, who happily doubles as my resident QA tester.</p>
+
+      <nav class="social-tags">
+        <a class="social-tag" href="#" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+        <a class="social-tag" href="https://github.com/preethirtera" target="_blank" rel="noopener">GitHub <span aria-hidden="true">&#8599;</span></a>
+        <a class="social-tag" href="mailto:tera.preethi@gmail.com">Email <span aria-hidden="true">&#8599;</span></a>
+      </nav>
     </section>
 
     <!-- RIGHT: STAGGERED PHOTOS -->

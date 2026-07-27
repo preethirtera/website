@@ -49,7 +49,7 @@ export default function Hero({
   videoSrc = "/olive-tagged.mp4",
   poster = "/olive-tagged-poster.jpg",
   onGetInTouch = () => { window.location.href = "contact.html"; },
-  onViewProjects = () => { window.location.href = "projects.html"; },
+  onViewProjects = () => { const el = document.getElementById("work"); if (el) el.scrollIntoView({ behavior: "smooth" }); },
 }) {
   const [lineIndex, setLineIndex] = useState(INSTANT ? LINES.length - 1 : 0);
   const [charCount, setCharCount] = useState(INSTANT ? LINES[LINES.length - 1].text.length : 0);
@@ -147,8 +147,8 @@ export default function Hero({
         <nav className="global-nav">
           <a href="?home">Home</a>
           <a href="about.html">About</a>
-          <a href="coming-soon.html">Work</a>
-          <a href="coming-soon.html">Play</a>
+          <a href="#work">Work</a>
+          <a href="urban.html">Play</a>
           <a href="contact.html">Contact</a>
         </nav>
       </header>
@@ -226,13 +226,6 @@ export default function Hero({
         </div>
       </div>
 
-      {/* Olive poofs in and sits — only after the blue burst (text typed out + centered) */}
-      {active && (
-        <div className="olive-runner" aria-hidden="true">
-          <span className="olive-poof" />
-          <div className="olive-pop"><div className="olive-viewport"><div className="olive-strip" /></div></div>
-        </div>
-      )}
     </section>
   );
 }
@@ -459,18 +452,6 @@ const css = `
 /* only once the hero has settled (centered) does scrolling drop the bar */
 .is-active.scrolled .global-bar { transform: translateY(0); }
 
-/* ---------- OLIVE RUNNER (transparent sprite, JS-driven) ---------- */
-.olive-runner { position: absolute; left: 50%; bottom: 6px; z-index: 3; pointer-events: none; transform: translateX(-50%); }
-.olive-poof { position: absolute; left: 50%; bottom: -14px; width: 172px; height: 172px; transform: translate(-50%, 0) scale(0.3); opacity: 0; z-index: 2; background: url('/poof.svg?v=2') center / contain no-repeat; animation: oPoof 10s ease-out infinite; }
-.olive-pop { position: relative; z-index: 1; transform-origin: bottom center; animation: oliveCycle 10s ease-in-out infinite; }
-.olive-viewport { width: 363px; height: 240px; overflow: hidden; transform: scale(0.42); transform-origin: bottom center; }
-.olive-strip { width: 11616px; height: 240px; background: url('/olive-run.png?v=7') 0 0 / 11616px 240px; transform: translateX(-7260px); animation: oWag 2s steps(12) infinite; }
-/* 10s loop: poof in (0–5%), sit & wag (5–50%), poof away (50–55%), gone until next */
-@keyframes oliveCycle { 0% { transform: scale(0); opacity: 0; } 3% { transform: scale(1.12); opacity: 1; } 5% { transform: scale(1); opacity: 1; } 50% { transform: scale(1); opacity: 1; } 55% { transform: scale(0); opacity: 0; } 100% { transform: scale(0); opacity: 0; } }
-@keyframes oPoof { 0% { opacity: 0; transform: translate(-50%, 0) scale(0.3); } 2% { opacity: 1; transform: translate(-50%, 0) scale(0.78); } 7% { opacity: 0; transform: translate(-50%, 0) scale(1.15); } 52% { opacity: 0; transform: translate(-50%, 0) scale(0.3); } 54% { opacity: 1; transform: translate(-50%, 0) scale(0.78); } 60% { opacity: 0; transform: translate(-50%, 0) scale(1.15); } 100% { opacity: 0; transform: translate(-50%, 0) scale(1.15); } }
-@keyframes oWag { from { transform: translateX(-7260px); } to { transform: translateX(-11616px); } }
-@media (prefers-reduced-motion: reduce) { .olive-pop, .olive-poof, .olive-strip { animation: none; } .olive-strip { transform: translateX(-7260px); } }
-
 /* arriving via Home: land settled & steady — no intro replay */
 .instant .video-frame { animation: none !important; transform: scale(0); opacity: 0; }
 .instant .video-blob { animation: none !important; opacity: 0; }
@@ -485,6 +466,5 @@ const css = `
   .hero-subtitle, .hero-tagline { max-width: none; }
   .hero-actions { justify-content: center; }
   .video-frame { transform: rotate(0); margin: 0 auto; box-shadow: 6px 8px 0 var(--brown); }
-  .olive-viewport { transform: scale(0.32); transform-origin: bottom center; }
 }
 `;
