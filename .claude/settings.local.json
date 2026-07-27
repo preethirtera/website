@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"site: %{http_code}\\\\n\" --max-time 8 https://rainchecks.app/)",
+      "Bash(curl -s --max-time 8 https://rainchecks.app/api/health)",
+      "Bash(dig +short NS rainchecks.app)",
+      "Bash(dig +short rainchecks.app)",
+      "Bash(dig +short rainchecks.app @1.1.1.1)",
+      "Bash(curl -s --resolve rainchecks.app:443:104.21.89.48 -o /dev/null -w \"site: %{http_code}\\\\n\" https://rainchecks.app/)",
+      "Bash(curl -s --resolve rainchecks.app:443:104.21.89.48 https://rainchecks.app/api/health)",
+      "Bash(curl -s --resolve rainchecks.app:443:104.21.89.48 https://rainchecks.app/)",
+      "Bash(gh repo *)",
+      "Bash(date -u -v-1M +%Y-%m-%dT%H:%M:%SZ)",
+      "Bash(curl -s -X POST https://rainchecks.app/api/subscribe -H 'content-type: application/json' -d '{\"subscription\":{\"endpoint\":\"https://httpbin.org/status/201\"},\"dueTimes\":[\"__CMDSUB_OUTPUT__\"]}')",
+      "Bash(curl -s -X POST https://rainchecks.app/api/wake)",
+      "Bash(curl -s -X DELETE https://rainchecks.app/api/subscribe -H 'content-type: application/json' -d '{\"endpoint\":\"https://httpbin.org/status/201\"}')",
+      "Read(//Users/preethitera/raincheck/**)",
+      "Bash(sed -i '' 's|| 3b | Connector backend: Slack/Teams/Gmail OAuth, email forwarding, web push while closed | needs hosting + accounts ||| 3b | Push while closed: Cloudflare Worker on rainchecks.app, privacy-first empty pushes, GH-cron sweep | ✅ ||' README.md)",
+      "Bash(npm run *)",
+      "Bash(git -C \"/Users/preethitera/preethi's new website\" log --oneline -2)",
+      "Bash(git -C \"/Users/preethitera/preethi's new website\" status --short)",
+      "Bash(git -C /Users/preethitera/raincheck log --oneline -2)",
+      "Bash(git -C /Users/preethitera/raincheck status --short)",
+      "Bash(curl -s -o /dev/null -w \"about: %{http_code}\\\\n\" https://rainchecks.app/about)",
+      "Bash(curl -s https://rainchecks.app/about)",
+      "Bash(git add *)",
+      "Bash(git commit -q -m 'Phase 5: features website at /about *)",
+      "Bash(git push *)",
+      "Bash(sed -i '' \"s|icon: '/pwa-192.png'|icon: '/app/pwa-192.png'|g; s|openWindow\\('/'\\)|openWindow\\('/app/'\\)|\" src/sw.ts)",
+      "Bash(sed -i '' 's|…rainchecks.app/#add=|…rainchecks.app/app#add=|' src/components/SettingsSheet.tsx)",
+      "Bash(sed -i '' 's|href=\"/\">Open the app|href=\"/app\">Open the app|; s|href=\"/\">Open RainChecks|href=\"/app\">Open RainChecks|' public/about.html)",
+      "Bash(npx wrangler *)",
+      "Bash(curl -s https://rainchecks.app/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" https://rainchecks.app/landing.html)",
+      "Bash(python3 -)"
+    ]
+  }
+}
