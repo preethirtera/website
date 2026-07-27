@@ -21,6 +21,11 @@
     },
   };
 </script>
+<style>
+  /* gallery hover-zoom: tile lifts and enlarges so the UI is readable */
+  figure.zoom { transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease; }
+  figure.zoom:hover { transform: scale(1.5); z-index: 60; box-shadow: 0 18px 50px rgba(55,32,32,.45) !important; }
+</style>
 </head>
 <body class="bg-cream font-sans text-espresso">
 
@@ -92,22 +97,22 @@
         <!-- RIGHT — asymmetrical dark UI gallery -->
         <div class="grid grid-cols-2 gap-5">
           <!-- tall feature shot -->
-          <figure class="relative col-span-2 row-span-2 aspect-[4/3] overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
+          <figure class="zoom relative col-span-2 row-span-2 aspect-[4/3] overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
             <img src="#" alt="StoryFuel — main interface" onerror="this.style.display='none'" class="absolute inset-0 h-full w-full object-cover" />
             <figcaption class="absolute inset-0 flex items-center justify-center text-xs font-semibold uppercase tracking-[0.25em] text-cream/40">Main Interface</figcaption>
           </figure>
 
-          <figure class="relative aspect-square overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
+          <figure class="zoom relative aspect-square overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
             <img src="#" alt="StoryFuel — chatbot" onerror="this.style.display='none'" class="absolute inset-0 h-full w-full object-cover" />
             <figcaption class="absolute inset-0 flex items-center justify-center text-[10px] font-semibold uppercase tracking-[0.22em] text-cream/40">Detail One</figcaption>
           </figure>
 
-          <figure class="relative aspect-square overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
+          <figure class="zoom relative aspect-square overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
             <img src="#" alt="StoryFuel — map view" onerror="this.style.display='none'" class="absolute inset-0 h-full w-full object-cover" />
             <figcaption class="absolute inset-0 flex items-center justify-center text-[10px] font-semibold uppercase tracking-[0.22em] text-cream/40">Detail Two</figcaption>
           </figure>
 
-          <figure class="relative col-span-2 aspect-[16/9] overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
+          <figure class="zoom relative col-span-2 aspect-[16/9] overflow-hidden rounded-2xl border-4 border-espresso bg-espresso shadow-[8px_8px_0px_0px_#372020]">
             <img src="#" alt="StoryFuel — data dashboard" onerror="this.style.display='none'" class="absolute inset-0 h-full w-full object-cover" />
             <figcaption class="absolute inset-0 flex items-center justify-center text-xs font-semibold uppercase tracking-[0.25em] text-cream/40">Overview Shot</figcaption>
           </figure>
