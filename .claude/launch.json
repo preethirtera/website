@@ -9,6 +9,13 @@
       "autoPort": true
     },
     {
+      "name": "rainchecks-dist",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "cd /Users/preethitera/raincheck/dist && python3 -m http.server \"${PORT:-5181}\""],
+      "port": 5181,
+      "autoPort": true
+    },
+    {
       "name": "raincheck",
       "runtimeExecutable": "sh",
       "runtimeArgs": ["-c", "npm run dev --prefix /Users/preethitera/raincheck -- --port \"${PORT:-5180}\" --strictPort"],
